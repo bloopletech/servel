@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
 require "servitude"
 
 servitude = Servitude::Servitude.new(Pathname.new(ARGV.first).realpath)

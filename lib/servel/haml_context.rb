@@ -1,4 +1,4 @@
-class Servitude::HamlContext
+class Servel::HamlContext
   ENGINE_OPTIONS = { remove_whitespace: true, escape_html: true, ugly: true }
 
   def initialize()

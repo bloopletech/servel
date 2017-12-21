@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-
-require "servitude"
-
-servitude = Servitude::Servitude.new(Pathname.new(ARGV.first).realpath)
-servitude.start

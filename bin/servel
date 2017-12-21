@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require "servel"
+
+servel = Servel::Servel.new(Pathname.new(ARGV.first).realpath)
+servel.start

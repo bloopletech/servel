@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "servitude/version"
+require "servel/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "servitude"
-  spec.version       = Servitude::VERSION
+  spec.name          = "servel"
+  spec.version       = Servel::VERSION
   spec.authors       = ["Brenton \"B-Train\" Fletcher"]
   spec.email         = ["i@bloople.net"]
 

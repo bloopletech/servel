@@ -1,4 +1,4 @@
-class Servitude::Servitude
+class Servel::Servel
   def initialize(server_root)
     @server_root = server_root
   end
@@ -11,7 +11,7 @@ class Servitude::Servitude
     server_root = @server_root
 
     Rack::Builder.new do
-      use(Servitude::Middleware, root: server_root)
+      use(Servel::Middleware, root: server_root)
       use Rack::Static, urls: [""], root: server_root.to_s
 
       run ->(env) do

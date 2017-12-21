@@ -1,8 +1,8 @@
-class Servitude::Middleware
+class Servel::Middleware
   def initialize(app, options = {})
     @app = app
     @root = Pathname.new(options[:root])
-    @haml_context = Servitude::HamlContext.new
+    @haml_context = Servel::HamlContext.new
   end
 
   def call(env)
@@ -21,9 +21,9 @@ class Servitude::Middleware
     url_path << "/" if url_path != "" && !url_path.end_with?("/")
 
     klass = if env['QUERY_STRING'] == "gallery"
-      Servitude::GalleryView
+      Servel::GalleryView
     else
-      Servitude::IndexView
+      Servel::IndexView
     end
 
     [200, {}, StringIO.new(klass.new(url_path, fs_path).render(@haml_context))]

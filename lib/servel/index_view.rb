@@ -1,4 +1,4 @@
-class Servitude::IndexView
+class Servel::IndexView
   def initialize(url_path, fs_path)
     @url_path = url_path
     @fs_path = fs_path

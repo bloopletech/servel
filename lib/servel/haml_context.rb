@@ -1,4 +1,6 @@
 class Servel::HamlContext
+  include ActiveSupport::NumberHelper
+
   ENGINE_OPTIONS = { remove_whitespace: true, escape_html: true, ugly: true }
 
   def initialize()

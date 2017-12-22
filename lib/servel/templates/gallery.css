@@ -1,19 +1,21 @@
-html, body {
-  height: 100%;
+#gallery {
+  padding: 20px;
+  background: #333;
+  transform: translateZ(0px);
 }
 
-body {
-  background-color: #333333;
+.hidden {
+  display: none !important;
 }
 
-#image {
+#image, #video {
   display: block;
   max-width: 100%;
   margin: 0 auto 0 auto;
 }
 
 @media (min-width: 992px) {
-  #image {
+  #image, #video {
     max-height: 100%;
   }
 }
@@ -81,6 +83,13 @@ body {
 #page-next-10 {
   bottom: 0;
   right: 0;
+  height: 100px;
+  z-index: 10001;
+}
+
+#page-toggle-size {
+  top: 0;
+  left: 0;
   height: 100px;
   z-index: 10001;
 }

@@ -1,3 +1,36 @@
-#container {
-  padding: 20px;
+html, body, #gallery {
+  height: 100%;
 }
+
+body.split-screen #listing {
+  height: 100%;
+  width: 50%;
+  float: left;
+  overflow: auto;
+}
+
+body.split-screen #gallery {
+  width: 50%;
+  float: right;
+}
+/*
+@media screen and (min-width: 1800px) {
+  #listing {
+    float: left;
+    width: 800px;
+    height: 100%;
+    overflow: auto;
+  }
+
+  #gallery {
+    margin-left: 800px;
+  }
+
+  body.gallery-expanded #listing {
+    display: none;
+  }
+
+  body.gallery-expanded #gallery {
+    margin-left: 0;
+  }
+}*/

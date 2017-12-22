@@ -1,0 +1,22 @@
+#listing {
+  padding: 20px;
+}
+
+#listing h1 {
+  margin-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 5px;
+  border: 1px solid #ddd;
+}
+
+tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}

@@ -1,0 +1,27 @@
+%h1 Directory Listing of #{url_path}
+%table
+  %thead
+    %tr
+      %th Name
+      %th Size
+      %th Modified
+  %tbody
+    - unless url_path == "/"
+      %tr
+        %td
+          (Dir)&nbsp;
+          %a{href: "../"} ../
+        %td
+        %td
+    - (directories + files).each do |file|
+      - relative_path = file.relative_path_from(fs_path)
+      %tr
+        %td
+          - if file.directory?
+            (Dir)&nbsp;
+          %a{href: relative_path, class: "#{"viewable" if file.image? || file.video?} #{"image" if file.image?} #{"video" if file.video?}"}
+            - extname = relative_path.extname
+            - basename = relative_path.basename(extname)
+            #{basename.to_s.truncate(50)}#{extname}
+        %td= number_to_human_size(file.size)
+        %td= file.mtime.strftime("%e %b %Y %l:%M %p")

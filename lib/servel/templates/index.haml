@@ -7,20 +7,12 @@
       #{include('normalize.css')}
       #{include('common.css')}
       #{include('index.css')}
+      #{include('listing.css')}
+      #{include('gallery.css')}
+
+    :javascript
+      #{include('gallery.js')}
   %body
-    #container
-      %h1 Directory Listing of #{url_path}
-      %ul
-        - if show_gallery
-          %li
-            %a{href: "#{url_path}?gallery"} Gallery
-        - unless url_path == "/"
-          %li
-            %a{href: "../"} ../
-        - (directories + files).each do |file|
-          - relative_path = file.relative_path_from(fs_path).to_s
-          %li
-            - if file.directory?
-              (Dir)&nbsp;
-            %a{href: relative_path}
-              = relative_path
+    - if show_gallery
+      #gallery!= partial('gallery')
+    #listing!= partial('listing', { url_path: url_path, fs_path: fs_path, directories: directories, files: files })

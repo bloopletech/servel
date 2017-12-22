@@ -20,13 +20,7 @@ class Servel::Middleware
 
     url_path << "/" if url_path != "" && !url_path.end_with?("/")
 
-    klass = if env['QUERY_STRING'] == "gallery"
-      Servel::GalleryView
-    else
-      Servel::IndexView
-    end
-
-    [200, {}, StringIO.new(klass.new(url_path, fs_path).render(@haml_context))]
+    [200, {}, StringIO.new(Servel::IndexView.new(url_path, fs_path).render(@haml_context))]
   end
 
   def url_path_for(url_path)

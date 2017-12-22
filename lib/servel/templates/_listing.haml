@@ -19,7 +19,7 @@
         %td
           - if file.directory?
             (Dir)&nbsp;
-          %a{href: relative_path, class: "#{"viewable" if file.image? || file.video?} #{"image" if file.image?} #{"video" if file.video?}"}
+          %a{href: relative_path, class: "#{"viewable" if file.image? || file.video?} #{"image" if file.image?} #{"video" if file.video?}", target: "_blank"}
             - extname = relative_path.extname
             - basename = relative_path.basename(extname)
             #{basename.to_s.truncate(50)}#{extname}

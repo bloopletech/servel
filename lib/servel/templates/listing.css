@@ -20,3 +20,7 @@ th, td {
 tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
+
+a.new-tab {
+  margin-left: 15px;
+}

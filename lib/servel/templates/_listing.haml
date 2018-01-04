@@ -11,6 +11,7 @@
         %td
           (Dir)&nbsp;
           %a{href: "../"} ../
+          %a.new-tab{href: "../", target: "_blank"} (New tab)
         %td
         %td
     - (directories + files).each do |file|
@@ -19,9 +20,10 @@
         %td
           - if file.directory?
             (Dir)&nbsp;
-          %a{href: file.basename, target: "_blank", **file.listing_attrs}
+          %a.default{href: file.basename, **file.listing_attrs}
             - extname = file.extname
             - basename = file.basename(extname)
             #{basename.to_s.truncate(50)}#{extname}
+          %a.new-tab{href: file.basename, target: "_blank", **file.listing_attrs} (New tab)
         %td= number_to_human_size(file.size)
         %td= file.mtime.strftime("%e %b %Y %l:%M %p")

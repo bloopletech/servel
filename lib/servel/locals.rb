@@ -1,17 +1,28 @@
 class Servel::Locals
-  def initialize(url_path, fs_path)
+  def initialize(url_path:, fs_path:, root:)
     @url_path = url_path
     @fs_path = fs_path
+    @root = root
   end
 
   def locals
-    directories, files = @fs_path.children.partition { |child| child.directory? }
-
     {
       url_path: @url_path,
-      directories: sort_paths(directories),
-      files: sort_paths(files)
+      directories: directories,
+      files: files
     }
+  end
+
+  def directories
+    list = @fs_path.children.select { |child| child.directory? }
+    list = sort_paths(list)
+    list.unshift(@fs_path.decorate(true)) unless @fs_path == @root
+    list
+  end
+
+  def files
+    list = @fs_path.children.select { |child| child.file? }
+    sort_paths(list)
   end
 
   def sort_paths(paths)

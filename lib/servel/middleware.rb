@@ -28,7 +28,8 @@ class Servel::Middleware
 
   def index(url_path, fs_path)
     @haml_context ||= Servel::HamlContext.new
-    body = @haml_context.render('index.haml', Servel::Locals.new(url_path, fs_path).locals)
+    locals = Servel::Locals.new(url_path: url_path, fs_path: fs_path, root: @root).locals
+    body = @haml_context.render('index.haml', locals)
 
     [200, {}, [body]]
   end

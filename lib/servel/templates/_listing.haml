@@ -3,27 +3,20 @@
   %thead
     %tr
       %th Name
-      %th Size
-      %th Modified
+      %th.new-tab
+      %th.type Type
+      %th.size Size
+      %th.modified Modified
   %tbody
-    - unless url_path == "/"
-      %tr
-        %td
-          (Dir)&nbsp;
-          %a{href: "../"} ../
-          %a.new-tab{href: "../", target: "_blank"} (New tab)
-        %td
-        %td
     - (directories + files).each do |file|
       - file = file.decorate
       %tr
         %td
           - if file.directory?
             (Dir)&nbsp;
-          %a.default{href: file.basename, **file.listing_attrs}
-            - extname = file.extname
-            - basename = file.basename(extname)
-            #{basename.to_s.truncate(50)}#{extname}
-          %a.new-tab{href: file.basename, target: "_blank", **file.listing_attrs} (New tab)
-        %td= number_to_human_size(file.size)
+          %a.default{href: file.href, **file.listing_attrs}= file.name
+        %td
+          %a.new-tab{href: file.href, target: "_blank", **file.listing_attrs} (New tab)
+        %td= file.type
+        %td= file.directory? ? "-" : number_to_human_size(file.size)
         %td= file.mtime.strftime("%e %b %Y %l:%M %p")

@@ -1,4 +1,9 @@
 class Servel::PathnameDecorator < SimpleDelegator
+  def initialize(pathname, parent)
+    super(pathname)
+    @parent = parent
+  end
+
   def decorate
     self
   end
@@ -20,6 +25,16 @@ class Servel::PathnameDecorator < SimpleDelegator
   end
 
   def type
+    if directory?
+      "Dir"
+    elsif file?
+      extname.sub(/^\./, "")
+    else
+      ""
+    end
+  end
+
+  def media_type
     return "video" if video?
     return "image" if image?
     return "audio" if audio?
@@ -39,8 +54,24 @@ class Servel::PathnameDecorator < SimpleDelegator
     {
       class: listing_classes,
       data: {
-        type: type
+        type: media_type
       }
     }
+  end
+
+  def href
+    if @parent
+      "../"
+    else
+      basename
+    end
+  end
+
+  def name
+    if @parent
+      "(Parent Directory)"
+    else
+      basename
+    end
   end
 end

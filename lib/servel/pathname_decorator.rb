@@ -11,13 +11,18 @@ class Servel::PathnameDecorator < SimpleDelegator
     file? && extname && %w(.webm).include?(extname.downcase)
   end
 
+  def audio?
+    file? && extname && %w(.mp3 .m4a .wav).include?(extname.downcase)
+  end
+
   def media?
-    image? || video?
+    image? || video? || audio?
   end
 
   def type
     return "video" if video?
     return "image" if image?
+    return "audio" if audio?
     "unknown"
   end
 
@@ -26,6 +31,7 @@ class Servel::PathnameDecorator < SimpleDelegator
     klasses << "media" if media?
     klasses << "image" if image?
     klasses << "video" if video?
+    klasses << "audio" if audio?
     klasses.join(" ")
   end
 

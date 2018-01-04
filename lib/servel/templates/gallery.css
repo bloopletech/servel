@@ -4,20 +4,21 @@
   transform: translateZ(0px);
 }
 
-#image, #video {
+#image, #video, #audio {
   display: none;
   max-width: 100%;
   margin: 0 auto 0 auto;
 }
 
-@media (min-width: 992px) {
-  #image, #video {
-    max-height: 100%;
-  }
+#audio {
+  width: 100%;
+  padding: 0 100px;
 }
 
-#gallery.video #image {
-  display: none;
+@media (min-width: 992px) {
+  #image, #video, #audio {
+    max-height: 100%;
+  }
 }
 
 #gallery.video #video {
@@ -28,8 +29,12 @@
   display: block;
 }
 
-#gallery.image #video {
-  display: none;
+#gallery.audio {
+  padding-top: 20px;
+}
+
+#gallery.audio #audio {
+  display: block;
 }
 
 .paginator {

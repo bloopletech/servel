@@ -14,14 +14,13 @@
         %td
         %td
     - (directories + files).each do |file|
-      - relative_path = file.relative_path_from(fs_path)
       %tr
         %td
           - if file.directory?
             (Dir)&nbsp;
-          %a{href: relative_path, class: "#{"viewable" if file.image? || file.video?} #{"image" if file.image?} #{"video" if file.video?}", target: "_blank"}
-            - extname = relative_path.extname
-            - basename = relative_path.basename(extname)
+          %a{href: file.basename, class: "#{"viewable" if file.image? || file.video?} #{"image" if file.image?} #{"video" if file.video?}", target: "_blank"}
+            - extname = file.extname
+            - basename = file.basename(extname)
             #{basename.to_s.truncate(50)}#{extname}
         %td= number_to_human_size(file.size)
         %td= file.mtime.strftime("%e %b %Y %l:%M %p")

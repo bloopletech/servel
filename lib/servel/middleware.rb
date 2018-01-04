@@ -10,15 +10,11 @@ class Servel::Middleware
     url_path = url_path_for(path)
     fs_path = @root + url_path[1..-1]
 
-    unless fs_path.directory?
-      return @app.call(env)
-    end
+    return @app.call(env) unless fs_path.directory?
 
-    if path != "" && !path.end_with?("/")
-      return [302, { "Location" => "#{url_path}/" }, []]
-    end
+    url_path << "/"
 
-    url_path << "/" if url_path != "" && !url_path.end_with?("/")
+    return [302, { "Location" => url_path }, []] unless path == "" || path.end_with?("/")
 
     [200, {}, StringIO.new(Servel::IndexView.new(url_path, fs_path).render(@haml_context))]
   end

@@ -10,8 +10,7 @@ class Servel::Locals
     {
       url_path: @url_path,
       directories: sort_paths(directories),
-      files: sort_paths(files),
-      show_gallery: files.any? { |file| file.image? }
+      files: sort_paths(files)
     }
   end
 

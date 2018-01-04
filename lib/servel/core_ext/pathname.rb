@@ -1,9 +1,5 @@
 class Pathname
-  def image?
-    file? && extname && %w(.jpg .jpeg .png .gif).include?(extname.downcase)
-  end
-
-  def video?
-    file? && extname && %w(.webm).include?(extname.downcase)
+  def decorate
+    Servel::PathnameDecorator.new(self)
   end
 end

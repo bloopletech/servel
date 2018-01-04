@@ -14,11 +14,12 @@
         %td
         %td
     - (directories + files).each do |file|
+      - file = file.decorate
       %tr
         %td
           - if file.directory?
             (Dir)&nbsp;
-          %a{href: file.basename, class: "#{"viewable" if file.image? || file.video?} #{"image" if file.image?} #{"video" if file.video?}", target: "_blank"}
+          %a{href: file.basename, target: "_blank", **file.listing_attrs}
             - extname = file.extname
             - basename = file.basename(extname)
             #{basename.to_s.truncate(50)}#{extname}

@@ -4,12 +4,8 @@
   transform: translateZ(0px);
 }
 
-.hidden {
-  display: none !important;
-}
-
 #image, #video {
-  display: block;
+  display: none;
   max-width: 100%;
   margin: 0 auto 0 auto;
 }
@@ -18,6 +14,22 @@
   #image, #video {
     max-height: 100%;
   }
+}
+
+#gallery.video #image {
+  display: none;
+}
+
+#gallery.video #video {
+  display: block;
+}
+
+#gallery.image #image {
+  display: block;
+}
+
+#gallery.image #video {
+  display: none;
 }
 
 .paginator {

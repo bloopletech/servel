@@ -1,6 +1,6 @@
 class Servel::Servel
-  def initialize(server_root)
-    @server_root = server_root
+  def initialize(root)
+    @root = root
   end
   
   def start
@@ -8,11 +8,11 @@ class Servel::Servel
   end
   
   def build_app
-    server_root = @server_root
+    root = @root
 
     Rack::Builder.new do
-      use(Servel::Middleware, root: server_root)
-      use Rack::Static, urls: [""], root: server_root.to_s
+      use(Servel::Middleware, root: root)
+      use(Rack::Static, urls: [""], root: root.to_s)
 
       run ->(env) do
         [404, {}, []]

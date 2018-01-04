@@ -13,6 +13,6 @@ end
 require "servel/version"
 require "servel/core_ext/pathname"
 require "servel/haml_context"
-require "servel/index_view"
+require "servel/locals"
 require "servel/middleware"
 require "servel/servel"

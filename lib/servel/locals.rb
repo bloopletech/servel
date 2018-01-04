@@ -1,11 +1,7 @@
-class Servel::IndexView
+class Servel::Locals
   def initialize(url_path, fs_path)
     @url_path = url_path
     @fs_path = fs_path
-  end
-
-  def render(haml_context)
-    haml_context.render('index.haml', locals)
   end
 
   def locals

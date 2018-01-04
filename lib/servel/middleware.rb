@@ -16,7 +16,8 @@ class Servel::Middleware
 
     return [302, { "Location" => url_path }, []] unless path == "" || path.end_with?("/")
 
-    [200, {}, StringIO.new(Servel::IndexView.new(url_path, fs_path).render(@haml_context))]
+    body = @haml_context.render('index.haml', Servel::Locals.new(url_path, fs_path).locals)
+    [200, {}, [body]]
   end
 
   def url_path_for(url_path)

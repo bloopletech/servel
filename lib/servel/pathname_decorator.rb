@@ -59,6 +59,20 @@ class Servel::PathnameDecorator < SimpleDelegator
     }
   end
 
+  def parent?
+    @parent
+  end
+
+  def icon
+    if @parent
+      "🔝"
+    elsif directory?
+      "📁"
+    else
+      ""
+    end
+  end
+
   def href
     if @parent
       "../"

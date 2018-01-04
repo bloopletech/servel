@@ -12,8 +12,7 @@
       - file = file.decorate
       %tr
         %td
-          - if file.directory?
-            (Dir)&nbsp;
+          %span.icon= file.icon
           %a.default{href: file.href, **file.listing_attrs}= file.name
         %td
           %a.new-tab{href: file.href, target: "_blank", **file.listing_attrs} (New tab)

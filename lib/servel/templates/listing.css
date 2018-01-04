@@ -37,3 +37,7 @@ th.size {
 th.modified {
   width: 12em;
 }
+
+span.icon {
+  margin-right: 0.2em;
+}

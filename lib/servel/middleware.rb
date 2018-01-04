@@ -2,7 +2,7 @@ class Servel::Middleware
   def initialize(app, options = {})
     @app = app
     @root = Pathname.new(options[:root])
-    @haml_context = Servel::HamlContext.new
+    @file_server = Rack::File.new(@root.to_s)
   end
 
   def call(env)
@@ -10,14 +10,13 @@ class Servel::Middleware
     url_path = url_path_for(path)
     fs_path = @root + url_path[1..-1]
 
-    return @app.call(env) unless fs_path.directory?
+    return @file_server.call(env) unless fs_path.directory?
 
-    url_path << "/"
+    url_path << "/" unless url_path.end_with?("/")
 
     return [302, { "Location" => url_path }, []] unless path == "" || path.end_with?("/")
 
-    body = @haml_context.render('index.haml', Servel::Locals.new(url_path, fs_path).locals)
-    [200, {}, [body]]
+    index(url_path, fs_path)
   end
 
   def url_path_for(url_path)
@@ -25,5 +24,12 @@ class Servel::Middleware
     raise unless Rack::Utils.valid_path?(url_path)
 
     Rack::Utils.clean_path_info(url_path)
+  end
+
+  def index(url_path, fs_path)
+    @haml_context ||= Servel::HamlContext.new
+    body = @haml_context.render('index.haml', Servel::Locals.new(url_path, fs_path).locals)
+
+    [200, {}, [body]]
   end
 end

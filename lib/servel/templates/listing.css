@@ -39,5 +39,22 @@ th.modified {
 }
 
 span.icon {
+  display: inline-block;
   margin-right: 0.2em;
+  width: 1.4em;
+  text-align: center;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover, a:focus, a:active {
+  text-decoration: underline;
+}
+
+a.default.parent {
+  font-style: oblique;
+}
+
+

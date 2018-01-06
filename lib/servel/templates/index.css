@@ -13,24 +13,3 @@ body.split-screen #gallery {
   width: 50%;
   float: right;
 }
-/*
-@media screen and (min-width: 1800px) {
-  #listing {
-    float: left;
-    width: 800px;
-    height: 100%;
-    overflow: auto;
-  }
-
-  #gallery {
-    margin-left: 800px;
-  }
-
-  body.gallery-expanded #listing {
-    display: none;
-  }
-
-  body.gallery-expanded #gallery {
-    margin-left: 0;
-  }
-}*/

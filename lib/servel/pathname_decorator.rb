@@ -47,6 +47,9 @@ class Servel::PathnameDecorator < SimpleDelegator
     klasses << "image" if image?
     klasses << "video" if video?
     klasses << "audio" if audio?
+    klasses << "parent" if parent?
+    klasses << "file" if file?
+    klasses << "directory" if directory?
     klasses.join(" ")
   end
 
@@ -68,8 +71,14 @@ class Servel::PathnameDecorator < SimpleDelegator
       "🔝"
     elsif directory?
       "📁"
+    elsif video?
+      "🎞️"
+    elsif image?
+      "🖼️"
+    elsif audio?
+      "🔊"
     else
-      ""
+      "📝"
     end
   end
 
@@ -83,7 +92,7 @@ class Servel::PathnameDecorator < SimpleDelegator
 
   def name
     if @parent
-      "(Parent Directory)"
+      "Parent Directory"
     else
       basename
     end

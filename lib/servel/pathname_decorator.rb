@@ -1,7 +1,8 @@
 class Servel::PathnameDecorator < SimpleDelegator
-  def initialize(pathname, parent)
+  def initialize(pathname:, parent:, top:)
     super(pathname)
     @parent = parent
+    @top = top
   end
 
   def decorate
@@ -47,6 +48,7 @@ class Servel::PathnameDecorator < SimpleDelegator
     klasses << "image" if image?
     klasses << "video" if video?
     klasses << "audio" if audio?
+    klasses << "top" if top?
     klasses << "parent" if parent?
     klasses << "file" if file?
     klasses << "directory" if directory?
@@ -62,13 +64,19 @@ class Servel::PathnameDecorator < SimpleDelegator
     }
   end
 
+  def top?
+    @top
+  end
+
   def parent?
     @parent
   end
 
   def icon
-    if @parent
+    if @top
       "🔝"
+    elsif @parent
+      "⬆️"
     elsif directory?
       "📁"
     elsif video?
@@ -83,7 +91,9 @@ class Servel::PathnameDecorator < SimpleDelegator
   end
 
   def href
-    if @parent
+    if @top
+      "/"
+    elsif @parent
       "../"
     else
       basename
@@ -91,7 +101,9 @@ class Servel::PathnameDecorator < SimpleDelegator
   end
 
   def name
-    if @parent
+    if @top
+      "Top Directory"
+    elsif @parent
       "Parent Directory"
     else
       basename

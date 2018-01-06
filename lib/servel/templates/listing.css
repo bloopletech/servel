@@ -53,7 +53,7 @@ a:hover, a:focus, a:active {
   text-decoration: underline;
 }
 
-a.default.parent {
+a.default.top, a.default.parent {
   font-style: oblique;
 }
 

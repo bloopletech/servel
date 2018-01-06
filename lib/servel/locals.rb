@@ -16,7 +16,12 @@ class Servel::Locals
   def directories
     list = @fs_path.children.select { |child| child.directory? }
     list = sort_paths(list)
-    list.unshift(@fs_path.decorate(true)) unless @fs_path == @root
+
+    unless @fs_path == @root
+      list.unshift(@fs_path.decorate(parent: true))
+      list.unshift(@root.decorate(top: true))
+    end
+
     list
   end
 

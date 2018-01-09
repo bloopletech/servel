@@ -72,6 +72,10 @@ class Servel::PathnameDecorator < SimpleDelegator
     @parent
   end
 
+  def virtual?
+    top? || parent?
+  end
+
   def icon
     if @top
       "🔝"
@@ -91,10 +95,8 @@ class Servel::PathnameDecorator < SimpleDelegator
   end
 
   def href
-    if @top
-      "/"
-    elsif @parent
-      "../"
+    if @top || @parent
+      to_s
     else
       basename
     end

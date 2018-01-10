@@ -3,17 +3,19 @@ class Servel::Middleware
     @app = app
     @root = Pathname.new(options[:root])
     @url_root = options[:url_root] || "/"
+    @url_root << "/" unless @url_root.end_with?("/")
+
     @file_server = Rack::File.new(@root.to_s)
   end
 
   def call(env)
-    sanitised_path = url_path_for(env["PATH_INFO"])
+    clean_path = url_path_for(env["PATH_INFO"])
 
-    return redirect(@url_root) if "#{sanitised_path}/" == @url_root
+    return redirect(@url_root) if "#{clean_path}/" == @url_root
 
-    return @app.call(env) unless sanitised_path.start_with?(@url_root)
+    return @app.call(env) unless clean_path.start_with?(@url_root)
 
-    url_path = sanitised_path.gsub(/\A#{Regexp.escape(@url_root)}/, '')
+    url_path = clean_path.gsub(/\A#{Regexp.escape(@url_root)}/, '')
     fs_path = @root + url_path
 
     unless fs_path.directory?

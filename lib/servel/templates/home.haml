@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %meta{charset: 'utf-8'}
+    %title Browse Listings
+    %meta{name: 'viewport', content: 'width=device-width, height=device-height, user-scalable=no'}
+    :css
+      #{include('normalize.css')}
+      #{include('common.css')}
+      #{include('home.css')}
+  %body
+    #home
+      %h1 Browse Listings
+      %ul#roots
+        - roots.each do |root|
+          %li
+            %a{href: root}= root
+            %a.new-tab{href: root, target: "_blank"} (New Tab)

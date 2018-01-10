@@ -45,16 +45,6 @@ span.icon {
   text-align: center;
 }
 
-a {
-  text-decoration: none;
-}
-
-a:hover, a:focus, a:active {
-  text-decoration: underline;
-}
-
 a.default.top, a.default.parent {
   font-style: oblique;
 }
-
-

@@ -15,3 +15,11 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover, a:focus, a:active {
+  text-decoration: underline;
+}

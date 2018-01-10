@@ -1,6 +1,6 @@
 class Servel::Servel
-  def initialize(root)
-    @root = root
+  def initialize(mapping)
+    @mapping = mapping
   end
 
   def start
@@ -8,10 +8,12 @@ class Servel::Servel
   end
 
   def build_app
-    root = @root
+    mapping = @mapping
 
     Rack::Builder.new do
-      use(Servel::Middleware, root: root)
+      mapping.each_pair do |root, url_root|
+        use(Servel::Middleware, root: root, url_root: url_root)
+      end
 
       run ->(env) do
         [404, {}, []]

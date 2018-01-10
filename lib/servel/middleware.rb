@@ -7,8 +7,7 @@ class Servel::Middleware
   end
 
   def call(env)
-    original_path = env["PATH_INFO"]
-    sanitised_path = url_path_for(original_path)
+    sanitised_path = url_path_for(env["PATH_INFO"])
 
     return redirect(@url_root) if "#{sanitised_path}/" == @url_root
 
@@ -22,7 +21,7 @@ class Servel::Middleware
       return @file_server.call(env)
     end
 
-    return redirect("#{@url_root}#{url_path}\/") unless original_path.end_with?("/")
+    return redirect("#{@url_root}#{url_path}\/") if url_path != "" && !url_path.end_with?("/")
 
     index(url_path, fs_path)
   end
@@ -35,10 +34,10 @@ class Servel::Middleware
     url_path = Rack::Utils.unescape_path(path)
     raise unless Rack::Utils.valid_path?(url_path)
 
-    url_path = Rack::Utils.clean_path_info(url_path)
-    url_path << "/" if url_path != "/" && path.end_with?("/")
+    clean_path = Rack::Utils.clean_path_info(url_path)
+    clean_path << "/" if clean_path != "/" && url_path.end_with?("/")
 
-    url_path
+    clean_path
   end
 
   def index(url_path, fs_path)

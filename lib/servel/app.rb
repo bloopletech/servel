@@ -1,4 +1,4 @@
-class Servel::Middleware
+class Servel::App
   def initialize(root)
     @root = Pathname.new(root)
     @file_server = Rack::File.new(root.to_s)

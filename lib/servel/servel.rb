@@ -11,7 +11,7 @@ class Servel::Servel
     url_map = {}
 
     @path_map.each_pair do |root, url_root|
-      url_map[url_root] = Servel::Middleware.new(root)
+      url_map[url_root] = Servel::App.new(root)
     end
 
     Rack::URLMap.new(url_map)

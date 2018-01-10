@@ -14,7 +14,7 @@ class Servel::PathnameDecorator < SimpleDelegator
   end
 
   def video?
-    file? && extname && %w(.webm).include?(extname.downcase)
+    file? && extname && %w(.webm .mp4).include?(extname.downcase)
   end
 
   def audio?

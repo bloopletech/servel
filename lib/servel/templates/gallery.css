@@ -1,5 +1,5 @@
 #gallery {
-  padding: 0 20px;
+  padding: 0 100px;
   background: #333;
   transform: translateZ(0px);
 }
@@ -12,7 +12,6 @@
 
 #audio {
   width: 100%;
-  padding: 0 100px;
 }
 
 @media (min-width: 992px) {
@@ -23,6 +22,10 @@
 
 #gallery.video #video {
   display: block;
+}
+
+#gallery.image {
+  padding: 0 20px;
 }
 
 #gallery.image #image {

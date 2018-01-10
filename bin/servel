@@ -2,13 +2,13 @@
 
 require "servel"
 
-mapping = {}
+path_map = {}
 
 ARGV.each do |arg|
   root, url_root = arg.split(":" , 2)
   root = Pathname.new(root).realpath
-  mapping[root] = url_root
+  path_map[root] = url_root
 end
 
-servel = Servel::Servel.new(mapping)
+servel = Servel::Servel.new(path_map)
 servel.start

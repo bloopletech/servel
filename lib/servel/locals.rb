@@ -5,7 +5,7 @@ class Servel::Locals
     @fs_path = fs_path
   end
 
-  def locals
+  def resolve
     {
       url_root: @url_root,
       url_path: @url_path,
@@ -18,7 +18,7 @@ class Servel::Locals
     list = @fs_path.children.select { |child| child.directory? }
     list = sort_paths(list)
 
-    unless @url_path == ""
+    unless @url_path == "/"
       list.unshift(Pathname.new("../").decorate(parent: true))
       list.unshift(Pathname.new(@url_root).decorate(top: true))
     end

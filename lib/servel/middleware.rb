@@ -1,51 +1,37 @@
 class Servel::Middleware
-  def initialize(app, options = {})
-    @app = app
-    @root = Pathname.new(options[:root])
-    @url_root = options[:url_root] || "/"
-    @url_root << "/" unless @url_root.end_with?("/")
-
-    @file_server = Rack::File.new(@root.to_s)
+  def initialize(root)
+    @root = Pathname.new(root)
+    @file_server = Rack::File.new(root.to_s)
   end
 
   def call(env)
-    clean_path = url_path_for(env["PATH_INFO"])
+    url_root = env["SCRIPT_NAME"]
+    url_path = clean_url_path(env["PATH_INFO"])
 
-    return redirect(@url_root) if "#{clean_path}/" == @url_root
+    return redirect("#{url_root}/") if env["PATH_INFO"] == ""
 
-    return @app.call(env) unless clean_path.start_with?(@url_root)
+    fs_path = @root + url_path[1..-1]
 
-    url_path = clean_path.gsub(/\A#{Regexp.escape(@url_root)}/, '')
-    fs_path = @root + url_path
+    return @file_server.call(env) if fs_path.file?
 
-    unless fs_path.directory?
-      env["PATH_INFO"] = "/#{url_path}"
-      return @file_server.call(env)
-    end
+    return redirect("#{url_root}#{url_path}/") unless env["PATH_INFO"].end_with?("/")
 
-    return redirect("#{@url_root}#{url_path}\/") if url_path != "" && !url_path.end_with?("/")
-
-    index(url_path, fs_path)
+    index(Servel::Locals.new(url_root: url_root, url_path: url_path, fs_path: fs_path))
   end
 
   def redirect(location)
     [302, { "Location" => location }, []]
   end
 
-  def url_path_for(path)
+  def clean_url_path(path)
     url_path = Rack::Utils.unescape_path(path)
     raise unless Rack::Utils.valid_path?(url_path)
-
-    clean_path = Rack::Utils.clean_path_info(url_path)
-    clean_path << "/" if clean_path != "/" && url_path.end_with?("/")
-
-    clean_path
+    Rack::Utils.clean_path_info(url_path)
   end
 
-  def index(url_path, fs_path)
+  def index(locals)
     @haml_context ||= Servel::HamlContext.new
-    locals = Servel::Locals.new(url_root: @url_root, url_path: url_path, fs_path: fs_path).locals
-    body = @haml_context.render('index.haml', locals)
+    body = @haml_context.render('index.haml', locals.resolve)
 
     [200, {}, [body]]
   end

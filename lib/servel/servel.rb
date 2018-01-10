@@ -1,6 +1,6 @@
 class Servel::Servel
-  def initialize(mapping)
-    @mapping = mapping
+  def initialize(path_map)
+    @path_map = path_map
   end
 
   def start
@@ -8,16 +8,12 @@ class Servel::Servel
   end
 
   def build_app
-    mapping = @mapping
+    url_map = {}
 
-    Rack::Builder.new do
-      mapping.each_pair do |root, url_root|
-        use(Servel::Middleware, root: root, url_root: url_root)
-      end
-
-      run ->(env) do
-        [404, {}, []]
-      end
+    @path_map.each_pair do |root, url_root|
+      url_map[url_root] = Servel::Middleware.new(root)
     end
+
+    Rack::URLMap.new(url_map)
   end
 end

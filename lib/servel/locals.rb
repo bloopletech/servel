@@ -19,8 +19,8 @@ class Servel::Locals
     list = sort_paths(list)
 
     unless @url_path == "/"
-      list.unshift(Pathname.new("../").decorate(parent: true))
-      list.unshift(Pathname.new(@url_root).decorate(top: true))
+      list.unshift(Servel::PathnameDecorator.new(pathname: "../", parent: true))
+      list.unshift(Servel::PathnameDecorator.new(pathname: @url_root, top: true))
     end
 
     list

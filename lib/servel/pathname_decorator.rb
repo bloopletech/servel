@@ -1,12 +1,8 @@
 class Servel::PathnameDecorator < SimpleDelegator
-  def initialize(pathname:, parent:, top:)
+  def initialize(pathname:, parent: false, top: false)
     super(pathname)
     @parent = parent
     @top = top
-  end
-
-  def decorate
-    self
   end
 
   def image?

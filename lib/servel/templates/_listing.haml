@@ -10,7 +10,7 @@
         %th.modified Modified
     %tbody
       - (directories + files).each do |file|
-        - file = file.decorate
+        - file = decorate(file)
         %tr
           %td
             %span.icon= file.icon

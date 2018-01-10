@@ -16,19 +16,23 @@ class Servel::Locals
 
   def directories
     list = @fs_path.children.select { |child| child.directory? }
-    list = sort_paths(list)
+    list = sort_paths(list).map { |path| build(path) }
 
     unless @url_path == "/"
-      list.unshift(Servel::PathnameDecorator.new(pathname: "../", parent: true))
-      list.unshift(Servel::PathnameDecorator.new(pathname: @url_root, top: true))
+      list.unshift(Servel::Path.parent("../"))
+      list.unshift(Servel::Path.top(@url_root))
     end
 
     list
   end
 
+  def build(path)
+    Servel::PathBuilder.new(path).build
+  end
+
   def files
     list = @fs_path.children.select { |child| child.file? }
-    sort_paths(list)
+    sort_paths(list).map { |path| build(path) }
   end
 
   def sort_paths(paths)

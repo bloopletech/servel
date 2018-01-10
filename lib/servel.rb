@@ -18,7 +18,8 @@ module Servel
 end
 
 require "servel/version"
-require "servel/pathname_decorator"
+require "servel/path"
+require "servel/path_builder"
 require "servel/haml_context"
 require "servel/locals"
 require "servel/app"

@@ -20,10 +20,6 @@ class Servel::HamlContext
     (@build_path + path).read
   end
 
-  def decorate(path)
-    Servel::PathnameDecorator.new(pathname: path)
-  end
-
   def haml_engine(path)
     unless @haml_engine_cache.key?(path)
       @haml_engine_cache[path] = Haml::Engine.new(include(path), ENGINE_OPTIONS.merge(filename: path))

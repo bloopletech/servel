@@ -10,7 +10,6 @@
         %th.modified Modified
     %tbody
       - (directories + files).each do |file|
-        - file = decorate(file)
         %tr
           %td
             %span.icon= file.icon
@@ -18,5 +17,5 @@
           %td
             %a.new-tab{href: file.href, target: "_blank", **file.listing_attrs} (New tab)
           %td= file.type
-          %td= file.directory? || file.virtual? ? "-" : number_to_human_size(file.size)
-          %td= file.virtual? ? "-" : file.mtime.strftime("%e %b %Y %l:%M %p")
+          %td= file.size.nil? ? "-" : number_to_human_size(file.size)
+          %td= file.mtime.nil? ? "-" : file.mtime.strftime("%e %b %Y %l:%M %p")

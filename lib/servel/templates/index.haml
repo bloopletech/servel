@@ -14,6 +14,6 @@
     :javascript
       #{include('gallery.js')}
   %body
-    - if files.any? { |f| decorate(f).media? }
+    - if files.any? { |f| f.media? }
       #gallery!= partial('gallery')
     #listing!= partial('listing', { url_root: url_root, url_path: url_path, directories: directories, files: files })

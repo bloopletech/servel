@@ -1,21 +1,22 @@
 %h1 Listing of #{url_root}#{url_path}
-%table
-  %thead
-    %tr
-      %th Name
-      %th.new-tab
-      %th.type Type
-      %th.size Size
-      %th.modified Modified
-  %tbody
-    - (directories + files).each do |file|
-      - file = file.decorate
+.table-wrapper
+  %table
+    %thead
       %tr
-        %td
-          %span.icon= file.icon
-          %a.default{href: file.href, **file.listing_attrs}= file.name
-        %td
-          %a.new-tab{href: file.href, target: "_blank", **file.listing_attrs} (New tab)
-        %td= file.type
-        %td= file.directory? || file.virtual? ? "-" : number_to_human_size(file.size)
-        %td= file.virtual? ? "-" : file.mtime.strftime("%e %b %Y %l:%M %p")
+        %th Name
+        %th.new-tab
+        %th.type Type
+        %th.size Size
+        %th.modified Modified
+    %tbody
+      - (directories + files).each do |file|
+        - file = file.decorate
+        %tr
+          %td
+            %span.icon= file.icon
+            %a.default{href: file.href, **file.listing_attrs}= file.name
+          %td
+            %a.new-tab{href: file.href, target: "_blank", **file.listing_attrs} (New tab)
+          %td= file.type
+          %td= file.directory? || file.virtual? ? "-" : number_to_human_size(file.size)
+          %td= file.virtual? ? "-" : file.mtime.strftime("%e %b %Y %l:%M %p")

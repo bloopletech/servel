@@ -6,8 +6,13 @@
   margin-top: 0;
 }
 
+.table-wrapper {
+  overflow: auto;
+}
+
 table {
   width: 100%;
+  min-width: 800px;
   border-collapse: collapse;
   border: 1px solid #ddd;
   table-layout: fixed;

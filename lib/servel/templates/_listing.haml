@@ -13,9 +13,9 @@
         %tr
           %td
             %span.icon= file.icon
-            %a.default{href: file.href, **file.listing_attrs}= file.name
+            %a.default{href: file.href, class: file.listing_classes, data: { type: file.media_type }}= file.name
           %td
-            %a.new-tab{href: file.href, target: "_blank", **file.listing_attrs} (New tab)
+            %a.new-tab{href: file.href, class: file.listing_classes, target: "_blank"} (New tab)
           %td= file.type
           %td= file.size.nil? ? "-" : number_to_human_size(file.size)
           %td= file.mtime.nil? ? "-" : file.mtime.strftime("%e %b %Y %l:%M %p")

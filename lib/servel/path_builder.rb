@@ -1,8 +1,12 @@
 class Servel::PathBuilder
+  IMAGE_EXTS = %w(.jpg .jpeg .png .gif)
+  VIDEO_EXTS = %w(.webm .mp4)
+  AUDIO_EXTS = %w(.mp3 .m4a .wav)
+
   def initialize(path)
     @path = Pathname.new(path)
   end
-  
+
   def build
     Servel::Path.new(
       type: type,
@@ -14,22 +18,6 @@ class Servel::PathBuilder
       size: size,
       mtime: @path.mtime
     )
-  end
-  
-  def image?
-    @path.file? && @path.extname && %w(.jpg .jpeg .png .gif).include?(@path.extname.downcase)
-  end
-
-  def video?
-    @path.file? && @path.extname && %w(.webm .mp4).include?(@path.extname.downcase)
-  end
-
-  def audio?
-    @path.file? && @path.extname && %w(.mp3 .m4a .wav).include?(@path.extname.downcase)
-  end
-
-  def media?
-    image? || video? || audio?
   end
 
   def type
@@ -43,31 +31,37 @@ class Servel::PathBuilder
   end
 
   def media_type
-    return "video" if video?
-    return "image" if image?
-    return "audio" if audio?
-    "unknown"
+    return nil unless @path.file? && @path.extname
+
+    case @path.extname.downcase
+    when *IMAGE_EXTS
+      :image
+    when *VIDEO_EXTS
+      :video
+    when *AUDIO_EXTS
+      :audio
+    else
+      nil
+    end
   end
 
   def listing_classes
     klasses = []
-    klasses << "media" if media?
-    klasses << "image" if image?
-    klasses << "video" if video?
-    klasses << "audio" if audio?
     klasses << "file" if @path.file?
     klasses << "directory" if @path.directory?
+    klasses << "media" if media_type
+    klasses << media_type if media_type
     klasses.join(" ")
   end
 
   def icon
-    if @path.directory?
-      "📁"
-    elsif video?
+    return "📁" if @path.directory?
+    case media_type
+    when :video
       "🎞️"
-    elsif image?
+    when :image
       "🖼️"
-    elsif audio?
+    when :audio
       "🔊"
     else
       "📝"

@@ -20,7 +20,7 @@ class Servel::Locals
 
     unless @url_path == "/"
       list.unshift(Servel::Path.parent("../"))
-      list.unshift(Servel::Path.top(@url_root))
+      list.unshift(Servel::Path.top(@url_root == "" ? "/" : @url_root))
     end
 
     list

@@ -16,6 +16,8 @@ class Servel::App
 
     return redirect("#{url_root}#{url_path}/") unless env["PATH_INFO"].end_with?("/")
 
+    return [404, {}, []] unless fs_path.exist?
+
     index(Servel::Locals.new(url_root: url_root, url_path: url_path, fs_path: fs_path))
   end
 

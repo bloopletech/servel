@@ -1,5 +1,4 @@
 #gallery {
-  padding: 0 100px;
   background: #333;
   transform: translateZ(0px);
 }
@@ -21,7 +20,7 @@
 }
 
 #gallery.video, #gallery.audio {
-  padding-top: 20px;
+  padding: 20px 100px;
 }
 
 #gallery.video #video {
@@ -29,7 +28,7 @@
 }
 
 #gallery.image {
-  padding: 0 20px;
+  padding: 20px 0;
 }
 
 #gallery.image #image {

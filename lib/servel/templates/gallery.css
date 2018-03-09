@@ -20,6 +20,10 @@
   }
 }
 
+#gallery.video, #gallery.audio {
+  padding-top: 20px;
+}
+
 #gallery.video #video {
   display: block;
 }
@@ -30,10 +34,6 @@
 
 #gallery.image #image {
   display: block;
-}
-
-#gallery.audio {
-  padding-top: 20px;
 }
 
 #gallery.audio #audio {

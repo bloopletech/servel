@@ -1,6 +1,6 @@
 class Servel::PathBuilder
   IMAGE_EXTS = %w(.jpg .jpeg .png .gif)
-  VIDEO_EXTS = %w(.webm .mp4)
+  VIDEO_EXTS = %w(.webm .mp4 .mkv)
   AUDIO_EXTS = %w(.mp3 .m4a .wav)
 
   def initialize(path)

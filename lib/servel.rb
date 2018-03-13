@@ -4,7 +4,7 @@ require 'haml'
 require 'naturalsorter'
 require 'active_support/all'
 
-require 'json'
+require 'thread'
 require 'pathname'
 require 'delegate'
 

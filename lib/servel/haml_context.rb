@@ -2,15 +2,14 @@ class Servel::HamlContext
   include ActiveSupport::NumberHelper
 
   ENGINE_OPTIONS = { remove_whitespace: true, escape_html: true, ugly: true }
+  LOCK = Mutex.new
 
   def self.render(template, locals)
-    @haml_context ||= new
-    [200, {}, [@haml_context.render(template, locals)]]
+    [200, {}, [new.render(template, locals)]]
   end
 
   def initialize
     @build_path = Pathname.new(__FILE__).dirname.realpath + 'templates'
-    @haml_engine_cache = {}
   end
 
   def render(template, locals = {})
@@ -26,9 +25,12 @@ class Servel::HamlContext
   end
 
   def haml_engine(path)
-    unless @haml_engine_cache.key?(path)
-      @haml_engine_cache[path] = Haml::Engine.new(include(path), ENGINE_OPTIONS.merge(filename: path))
+    LOCK.synchronize do
+      @@haml_engine_cache ||= {}
+      unless @@haml_engine_cache.key?(path)
+        @@haml_engine_cache[path] = Haml::Engine.new(include(path), ENGINE_OPTIONS.merge(filename: path))
+      end
+      @@haml_engine_cache[path]
     end
-    @haml_engine_cache[path]
   end
 end

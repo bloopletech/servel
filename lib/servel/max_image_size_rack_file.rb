@@ -18,7 +18,7 @@ module Servel
 
       response = [ 200, headers ]
 
-      if (max_size = request.get_header('HTTP_X_MAX_IMAGE_SIZE')) && IMAGE_EXTS.include?(::File.extname(path))
+      if (max_size = request.get_header('HTTP_WIDTH')) && IMAGE_EXTS.include?(::File.extname(path))
         image = resize_image(path, max_size.to_i)
 
         if image

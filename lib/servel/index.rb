@@ -1,11 +1,15 @@
-class Servel::Locals
+class Servel::Index
   def initialize(url_root:, url_path:, fs_path:)
     @url_root = url_root
     @url_path = url_path
     @fs_path = fs_path
   end
 
-  def resolve
+  def render
+    Servel::HamlContext.render('index.haml', locals)
+  end
+
+  def locals
     {
       url_root: @url_root,
       url_path: @url_path,
@@ -16,23 +20,19 @@ class Servel::Locals
 
   def directories
     list = @fs_path.children.select { |child| child.directory? }
-    list = sort_paths(list).map { |path| build(path) }
+    list = sort_paths(list).map { |path| Servel::EntryFactory.for(path) }
 
     unless @url_path == "/"
-      list.unshift(Servel::Path.parent("../"))
-      list.unshift(Servel::Path.top(@url_root == "" ? "/" : @url_root))
+      list.unshift(Servel::EntryFactory.parent("../"))
+      list.unshift(Servel::EntryFactory.top(@url_root == "" ? "/" : @url_root))
     end
 
     list
   end
 
-  def build(path)
-    Servel::PathBuilder.new(path).build
-  end
-
   def files
     list = @fs_path.children.select { |child| child.file? }
-    sort_paths(list).map { |path| build(path) }
+    sort_paths(list).map { |path| Servel::EntryFactory.for(path) }
   end
 
   def sort_paths(paths)

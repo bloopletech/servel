@@ -18,7 +18,7 @@ class Servel::App
 
     return [404, {}, []] unless fs_path.exist?
 
-    index(Servel::Locals.new(url_root: url_root, url_path: url_path, fs_path: fs_path))
+    Servel::Index.new(url_root: url_root, url_path: url_path, fs_path: fs_path).render
   end
 
   def redirect(location)
@@ -29,12 +29,5 @@ class Servel::App
     url_path = Rack::Utils.unescape_path(path)
     raise unless Rack::Utils.valid_path?(url_path)
     Rack::Utils.clean_path_info(url_path)
-  end
-
-  def index(locals)
-    @haml_context ||= Servel::HamlContext.new
-    body = @haml_context.render('index.haml', locals.resolve)
-
-    [200, {}, [body]]
   end
 end

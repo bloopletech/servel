@@ -1,14 +1,38 @@
-class Servel::PathBuilder
+class Servel::EntryFactory
   IMAGE_EXTS = %w(.jpg .jpeg .png .gif)
   VIDEO_EXTS = %w(.webm .mp4 .mkv)
   AUDIO_EXTS = %w(.mp3 .m4a .wav)
+
+  def self.top(href)
+    Servel::Entry.new(
+      type: "Dir",
+      listing_classes: "top directory",
+      icon: "🔝",
+      href: href,
+      name: "Top Directory"
+    )
+  end
+
+  def self.parent(href)
+    Servel::Entry.new(
+      type: "Dir",
+      listing_classes: "parent directory",
+      icon: "⬆️",
+      href: href,
+      name: "Parent Directory"
+    )
+  end
+
+  def self.for(path)
+    new(path).entry
+  end
 
   def initialize(path)
     @path = Pathname.new(path)
   end
 
-  def build
-    Servel::Path.new(
+  def entry
+    Servel::Entry.new(
       type: type,
       media_type: media_type,
       listing_classes: listing_classes,

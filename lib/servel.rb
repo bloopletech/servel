@@ -18,10 +18,10 @@ module Servel
 end
 
 require "servel/version"
-require "servel/path"
-require "servel/path_builder"
+require "servel/entry"
+require "servel/entry_factory"
 require "servel/haml_context"
-require "servel/locals"
+require "servel/index"
 require "servel/app"
 require "servel/home_app"
 require "servel/cli"

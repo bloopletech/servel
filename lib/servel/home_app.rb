@@ -4,9 +4,6 @@ class Servel::HomeApp
   end
 
   def call(env)
-    @haml_context ||= Servel::HamlContext.new
-    body = @haml_context.render('home.haml', { roots: @roots })
-
-    [200, {}, [body]]
+    Servel::HamlContext.render('home.haml', { roots: @roots })
   end
 end

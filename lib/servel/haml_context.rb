@@ -3,7 +3,12 @@ class Servel::HamlContext
 
   ENGINE_OPTIONS = { remove_whitespace: true, escape_html: true, ugly: true }
 
-  def initialize()
+  def self.render(template, locals)
+    @haml_context ||= new
+    [200, {}, [@haml_context.render(template, locals)]]
+  end
+
+  def initialize
     @build_path = Pathname.new(__FILE__).dirname.realpath + 'templates'
     @haml_engine_cache = {}
   end

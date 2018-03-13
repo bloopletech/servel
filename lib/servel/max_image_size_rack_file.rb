@@ -20,7 +20,9 @@ module Servel
 
       if (max_size = request.get_header('HTTP_X_MAX_IMAGE_SIZE')) && IMAGE_EXTS.include?(::File.extname(path))
         image = resize_image(path, max_size.to_i)
+
         if image
+          response[1][Rack::CONTENT_TYPE] = "image/jpeg"
           response[2] = [image]
           return response
         end
@@ -62,6 +64,7 @@ module Servel
 
       img.change_geometry!("#{max_dimension}x#{max_dimension}") { |cols, rows, _img| _img.resize!(cols, rows) }
       img.page = Magick::Rectangle.new(img.columns, img.rows, 0, 0)
+      img.format = "JPG"
 
       img.to_blob
     rescue Exception => e

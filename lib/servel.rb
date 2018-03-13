@@ -6,7 +6,6 @@ require 'active_support/all'
 
 require 'thread'
 require 'pathname'
-require 'delegate'
 
 module Servel
   def self.build_app(path_map)

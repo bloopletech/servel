@@ -1,7 +1,7 @@
 class Servel::App
   def initialize(root)
     @root = Pathname.new(root)
-    @file_server = Rack::File.new(root.to_s)
+    @file_server = Servel::MaxImageSizeRackFile.new(root.to_s)
   end
 
   def call(env)

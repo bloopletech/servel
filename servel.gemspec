@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "naturalsorter"
   spec.add_dependency "haml", "~> 4"
   spec.add_dependency "activesupport"
+  spec.add_dependency "rmagick", ">= 2.13.1"
 end

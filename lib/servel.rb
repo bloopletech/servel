@@ -3,6 +3,7 @@ require 'rack/handler/puma'
 require 'haml'
 require 'naturalsorter'
 require 'active_support/all'
+require 'rmagick'
 
 require 'thread'
 require 'pathname'
@@ -21,6 +22,7 @@ require "servel/entry"
 require "servel/entry_factory"
 require "servel/haml_context"
 require "servel/index"
+require "servel/max_image_size_rack_file"
 require "servel/app"
 require "servel/home_app"
 require "servel/cli"

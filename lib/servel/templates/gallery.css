@@ -3,7 +3,7 @@
   transform: translateZ(0px);
 }
 
-#image, #video, #audio {
+#image, #video, #audio, #text {
   display: none;
   max-width: 100%;
   margin: 0 auto 0 auto;
@@ -13,8 +13,12 @@
   width: 100%;
 }
 
+#text {
+  overflow: auto;
+}
+
 @media (min-width: 992px) {
-  #image, #video, #audio {
+  #image, #video, #audio, #text {
     max-height: 100%;
   }
 }
@@ -36,6 +40,16 @@
 }
 
 #gallery.audio #audio {
+  display: block;
+}
+
+#gallery.text {
+  padding: 0 100px;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+#gallery.text #text {
   display: block;
 }
 

@@ -2,6 +2,7 @@ class Servel::EntryFactory
   IMAGE_EXTS = %w(.jpg .jpeg .png .gif)
   VIDEO_EXTS = %w(.webm .mp4 .mkv)
   AUDIO_EXTS = %w(.mp3 .m4a .wav)
+  TEXT_EXTS = %w(.txt)
 
   def self.top(href)
     Servel::Entry.new(
@@ -64,6 +65,8 @@ class Servel::EntryFactory
       :video
     when *AUDIO_EXTS
       :audio
+    when *TEXT_EXTS
+      :text
     else
       nil
     end

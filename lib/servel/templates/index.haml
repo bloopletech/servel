@@ -10,8 +10,10 @@
       #{include('index.css')}
       #{include('listing.css')}
       #{include('gallery.css')}
+      #{include('gallery-text.css')}
 
     :javascript
+      #{include('ume.js')}
       #{include('gallery.js')}
   %body
     - if files.any? { |f| f.media? }

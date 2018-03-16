@@ -15,6 +15,8 @@
 
 #text {
   overflow: auto;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 @media (min-width: 992px) {
@@ -45,8 +47,6 @@
 
 #gallery.text {
   padding: 0 100px;
-  color: #000000;
-  background-color: #ffffff;
 }
 
 #gallery.text #text {

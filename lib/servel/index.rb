@@ -27,6 +27,8 @@ class Servel::Index
       list.unshift(Servel::EntryFactory.top(@url_root == "" ? "/" : @url_root))
     end
 
+    list.unshift(Servel::EntryFactory.home("/")) if @url_root != ""
+
     list
   end
 

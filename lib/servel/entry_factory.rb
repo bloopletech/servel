@@ -4,6 +4,16 @@ class Servel::EntryFactory
   AUDIO_EXTS = %w(.mp3 .m4a .wav)
   TEXT_EXTS = %w(.txt)
 
+  def self.home(href)
+    Servel::Entry.new(
+      type: "Dir",
+      listing_classes: "home directory",
+      icon: "🏠",
+      href: href,
+      name: "Listings Home"
+    )
+  end
+
   def self.top(href)
     Servel::Entry.new(
       type: "Dir",

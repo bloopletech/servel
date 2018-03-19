@@ -50,6 +50,6 @@ span.icon {
   text-align: center;
 }
 
-a.default.top, a.default.parent {
+a.default.home, a.default.top, a.default.parent {
   font-style: oblique;
 }

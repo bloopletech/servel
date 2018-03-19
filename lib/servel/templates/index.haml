@@ -5,16 +5,16 @@
     %title Listing of #{url_root}#{url_path}
     %meta{name: 'viewport', content: 'width=device-width, height=device-height, user-scalable=no'}
     :css
-      #{include('normalize.css')}
-      #{include('common.css')}
-      #{include('index.css')}
-      #{include('listing.css')}
-      #{include('gallery.css')}
-      #{include('gallery-text.css')}
+      #{include('css/normalize.css')}
+      #{include('css/common.css')}
+      #{include('css/index.css')}
+      #{include('css/listing.css')}
+      #{include('css/gallery.css')}
+      #{include('css/gallery-text.css')}
 
     :javascript
-      #{include('ume.js')}
-      #{include('gallery.js')}
+      #{include('js/ume.js')}
+      #{include('js/gallery.js')}
   %body
     - if files.any? { |f| f.media? }
       #gallery!= partial('gallery')

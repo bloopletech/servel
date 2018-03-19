@@ -9,6 +9,10 @@
   margin: 0 auto 0 auto;
 }
 
+#video:focus, #audio:focus {
+  outline: none;
+}
+
 #audio {
   width: 100%;
 }

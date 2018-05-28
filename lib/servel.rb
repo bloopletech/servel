@@ -17,6 +17,7 @@ module Servel
 end
 
 require "servel/version"
+require "servel/instrumentation"
 require "servel/entry"
 require "servel/entry_factory"
 require "servel/haml_context"

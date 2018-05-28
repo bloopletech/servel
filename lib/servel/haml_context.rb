@@ -1,4 +1,5 @@
 class Servel::HamlContext
+  extend Servel::Instrumentation
   include ActiveSupport::NumberHelper
 
   ENGINE_OPTIONS = { remove_whitespace: true, escape_html: true, ugly: true }
@@ -33,4 +34,6 @@ class Servel::HamlContext
       @@haml_engine_cache[path]
     end
   end
+
+  instrument :render, :partial, :include
 end

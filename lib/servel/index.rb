@@ -1,4 +1,6 @@
 class Servel::Index
+  extend Servel::Instrumentation
+
   def initialize(url_root:, url_path:, fs_path:)
     @url_root = url_root
     @url_path = url_path
@@ -40,4 +42,6 @@ class Servel::Index
   def sort_paths(paths)
     Naturalsorter::Sorter.sort(paths.map(&:to_s), true).map { |path| Pathname.new(path) }
   end
+
+  instrument :locals, :directories, :files, :sort_paths
 end

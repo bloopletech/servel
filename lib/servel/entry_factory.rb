@@ -1,4 +1,6 @@
 class Servel::EntryFactory
+  extend Servel::Instrumentation
+
   IMAGE_EXTS = %w(.jpg .jpeg .png .gif)
   VIDEO_EXTS = %w(.webm .mp4 .mkv)
   AUDIO_EXTS = %w(.mp3 .m4a .wav)
@@ -54,6 +56,8 @@ class Servel::EntryFactory
       mtime: @path.mtime
     )
   end
+
+  instrument :entry
 
   def type
     if @path.directory?

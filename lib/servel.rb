@@ -1,6 +1,6 @@
 require 'rack'
 require 'rack/handler/puma'
-require 'haml'
+require 'hamlit'
 require 'naturalsorter'
 require 'active_support/all'
 require 'lru_redux'

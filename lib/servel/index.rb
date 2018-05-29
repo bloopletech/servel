@@ -12,6 +12,8 @@ class Servel::Index
   end
 
   def locals
+    @entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }
+
     {
       url_root: @url_root,
       url_path: @url_path,
@@ -21,8 +23,7 @@ class Servel::Index
   end
 
   def directories
-    list = @fs_path.children.select { |child| child.directory? }
-    list = sort_paths(list).map { |path| Servel::EntryFactory.for(path) }
+    list = sort_entries(@entries.select { |entry| entry.directory? })
 
     unless @url_path == "/"
       list.unshift(Servel::EntryFactory.parent("../"))
@@ -35,13 +36,12 @@ class Servel::Index
   end
 
   def files
-    list = @fs_path.children.select { |child| child.file? }
-    sort_paths(list).map { |path| Servel::EntryFactory.for(path) }
+    sort_entries(@entries.select { |entry| entry.file? })
   end
 
-  def sort_paths(paths)
-    Naturalsorter::Sorter.sort(paths.map(&:to_s), true).map { |path| Pathname.new(path) }
+  def sort_entries(entries)
+    Naturalsorter::Sorter.sort_by_method(entries, :name, true)
   end
 
-  instrument :locals, :directories, :files, :sort_paths
+  instrument :locals, :directories, :files, :sort_entries
 end

@@ -8,6 +8,7 @@ class Servel::EntryFactory
 
   def self.home(href)
     Servel::Entry.new(
+      ftype: :directory,
       type: "Dir",
       listing_classes: "home directory",
       icon: "🏠",
@@ -18,6 +19,7 @@ class Servel::EntryFactory
 
   def self.top(href)
     Servel::Entry.new(
+      ftype: :directory,
       type: "Dir",
       listing_classes: "top directory",
       icon: "🔝",
@@ -28,6 +30,7 @@ class Servel::EntryFactory
 
   def self.parent(href)
     Servel::Entry.new(
+      ftype: :directory,
       type: "Dir",
       listing_classes: "parent directory",
       icon: "⬆️",
@@ -41,38 +44,46 @@ class Servel::EntryFactory
   end
 
   def initialize(path)
-    @path = Pathname.new(path)
+    @path_basename = path.basename.to_s
+    @path_extname = path.extname.to_s
+    stat = path.stat
+    @path_mtime = stat.mtime
+    @path_size = stat.size
+    @path_ftype = stat.ftype.intern
+    @path_directory = @path_ftype == :directory
+    @path_file = @path_ftype == :file
   end
+
+  instrument :initialize
 
   def entry
     Servel::Entry.new(
+      ftype: @path_ftype,
       type: type,
       media_type: media_type,
       listing_classes: listing_classes,
       icon: icon,
-      href: @path.basename,
-      name: @path.basename,
+      href: @path_basename,
+      name: @path_basename,
       size: size,
-      mtime: @path.mtime
+      mtime: @path_mtime
     )
   end
 
-  instrument :entry
-
   def type
-    if @path.directory?
+    if @path_directory
       "Dir"
-    elsif @path.file?
-      @path.extname.sub(/^\./, "")
+    elsif @path_file
+      @path_extname.sub(/^\./, "")
     else
       ""
     end
   end
 
   def media_type
-    return nil unless @path.file? && @path.extname
+    return nil unless @path_file && @path_extname
 
-    case @path.extname.downcase
+    case @path_extname.downcase
     when *IMAGE_EXTS
       :image
     when *VIDEO_EXTS
@@ -88,15 +99,15 @@ class Servel::EntryFactory
 
   def listing_classes
     klasses = []
-    klasses << "file" if @path.file?
-    klasses << "directory" if @path.directory?
+    klasses << "file" if @path_file
+    klasses << "directory" if @path_directory
     klasses << "media" if media_type
     klasses << media_type if media_type
     klasses.join(" ")
   end
 
   def icon
-    return "📁" if @path.directory?
+    return "📁" if @path_directory
     case media_type
     when :video
       "🎞️"
@@ -110,6 +121,6 @@ class Servel::EntryFactory
   end
 
   def size
-    @path.directory? ? nil : @path.size
+    @path_directory ? nil : @path_size
   end
 end

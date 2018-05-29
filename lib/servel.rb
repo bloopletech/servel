@@ -3,6 +3,7 @@ require 'rack/handler/puma'
 require 'haml'
 require 'naturalsorter'
 require 'active_support/all'
+require 'lru_redux'
 
 require 'thread'
 require 'pathname'

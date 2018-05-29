@@ -1,10 +1,12 @@
 class Servel::Index
   extend Servel::Instrumentation
+  LOCALS_CACHE = LruRedux::ThreadSafeCache.new(100)
 
   def initialize(url_root:, url_path:, fs_path:)
     @url_root = url_root
     @url_path = url_path
     @fs_path = fs_path
+    @locals_cache_key = "#{@fs_path.mtime}-#{@fs_path.to_s}"
   end
 
   def render
@@ -12,6 +14,10 @@ class Servel::Index
   end
 
   def locals
+    LOCALS_CACHE.getset(@locals_cache_key) { build_locals }
+  end
+
+  def build_locals
     @entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }
 
     {

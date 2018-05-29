@@ -1,6 +1,6 @@
 class Servel::Index
   extend Servel::Instrumentation
-  LOCALS_CACHE = LruRedux::ThreadSafeCache.new(100)
+  RENDER_CACHE = LruRedux::ThreadSafeCache.new(100)
   SORT_METHODS = ["name", "mtime", "size", "type"]
   SORT_DIRECTIONS = ["asc", "desc"]
 
@@ -12,30 +12,14 @@ class Servel::Index
   end
 
   def render
-    Servel::HamlContext.render('index.haml', locals)
+    RENDER_CACHE.getset(render_cache_key) { Servel::HamlContext.render('index.haml', locals) }
   end
 
-  def sort_method
-    param = @params["_servel_sort_method"]
-    param = "name" unless SORT_METHODS.include?(param)
-    param
-  end
-
-  def sort_direction
-    param = @params["_servel_sort_direction"]
-    param = "asc" unless SORT_DIRECTIONS.include?(param)
-    param
-  end
-
-  def locals_cache_key
-    @locals_cache_key ||= [@fs_path.to_s, @fs_path.mtime.to_i, sort_method, sort_direction].join("-")
+  def render_cache_key
+    @render_cache_key ||= [@fs_path.to_s, @fs_path.mtime.to_i, sort_method, sort_direction].join("-")
   end
 
   def locals
-    LOCALS_CACHE.getset(locals_cache_key) { build_locals }
-  end
-
-  def build_locals
     entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }.compact
 
     {
@@ -48,6 +32,18 @@ class Servel::Index
         direction: sort_direction
       }
     }
+  end
+
+  def sort_method
+    param = @params["_servel_sort_method"]
+    param = "name" unless SORT_METHODS.include?(param)
+    param
+  end
+
+  def sort_direction
+    param = @params["_servel_sort_direction"]
+    param = "asc" unless SORT_DIRECTIONS.include?(param)
+    param
   end
 
   def directories(entries)
@@ -83,9 +79,5 @@ class Servel::Index
     entries
   end
 
-  def sort_entries(entries)
-    Naturalsorter::Sorter.sort_by_method(entries, :name, true)
-  end
-
-  instrument :locals, :directories, :files, :sort_entries
+  instrument :render, :locals, :directories, :files, :apply_sort
 end

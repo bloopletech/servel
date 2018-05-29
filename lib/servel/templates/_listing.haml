@@ -3,11 +3,15 @@
   %table
     %thead
       %tr
-        %th Name
+        %th{sort_attrs(sort, "name")}
+          %a{href: "#"} Name
         %th.new-tab
-        %th.type Type
-        %th.size Size
-        %th.modified Modified
+        %th.type{sort_attrs(sort, "type")}
+          %a{href: "#"} Type
+        %th.size{sort_attrs(sort, "size")}
+          %a{href: "#"} Size
+        %th.modified{sort_attrs(sort, "mtime")}
+          %a{href: "#"} Modified
     %tbody
       - (directories + files).each do |file|
         %tr

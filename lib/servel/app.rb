@@ -18,7 +18,8 @@ class Servel::App
 
     return [404, {}, []] unless fs_path.exist?
 
-    Servel::Index.new(url_root: url_root, url_path: url_path, fs_path: fs_path).render
+    request = Rack::Request.new(env)
+    Servel::Index.new(url_root: url_root, url_path: url_path, fs_path: fs_path, params: request.params).render
   end
 
   def redirect(location)

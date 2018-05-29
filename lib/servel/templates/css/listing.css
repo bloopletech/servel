@@ -18,6 +18,10 @@ table {
   table-layout: fixed;
 }
 
+th {
+  font-weight: normal;
+}
+
 th, td {
   padding: 5px;
   border: 1px solid #ddd;
@@ -41,6 +45,18 @@ th.size {
 
 th.modified {
   width: 12em;
+}
+
+th.sortable.sort-active {
+  font-weight: bold;
+}
+
+th.sortable.sort-active.sort-asc a::after {
+  content: " ⬇️";
+}
+
+th.sortable.sort-active.sort-desc a::after {
+  content: " ⬆️";
 }
 
 span.icon {

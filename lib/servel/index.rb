@@ -36,7 +36,7 @@ class Servel::Index
   end
 
   def build_locals
-    entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }
+    entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }.compact
 
     {
       url_root: @url_root,

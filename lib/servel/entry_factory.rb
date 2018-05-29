@@ -41,6 +41,8 @@ class Servel::EntryFactory
 
   def self.for(path)
     new(path).entry
+  rescue Errno::EACCES
+    nil
   end
 
   def initialize(path)

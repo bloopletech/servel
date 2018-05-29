@@ -18,18 +18,18 @@ class Servel::Index
   end
 
   def build_locals
-    @entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }
+    entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }
 
     {
       url_root: @url_root,
       url_path: @url_path,
-      directories: directories,
-      files: files
+      directories: directories(entries),
+      files: files(entries)
     }
   end
 
-  def directories
-    list = sort_entries(@entries.select { |entry| entry.directory? })
+  def directories(entries)
+    list = sort_entries(entries.select { |entry| entry.directory? })
 
     unless @url_path == "/"
       list.unshift(Servel::EntryFactory.parent("../"))
@@ -41,8 +41,8 @@ class Servel::Index
     list
   end
 
-  def files
-    sort_entries(@entries.select { |entry| entry.file? })
+  def files(entries)
+    sort_entries(entries.select { |entry| entry.file? })
   end
 
   def sort_entries(entries)

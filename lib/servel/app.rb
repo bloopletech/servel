@@ -23,7 +23,7 @@ class Servel::App
   end
 
   def redirect(location)
-    [302, { "Location" => location }, []]
+    [302, { "Location" => Rack::Utils.escape_path(location) }, []]
   end
 
   def clean_url_path(path)

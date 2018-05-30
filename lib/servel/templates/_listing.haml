@@ -13,7 +13,7 @@
         %th.modified{sort_attrs(sort, "mtime")}
           %a{href: "#"} Modified
     %tbody
-      - (directories + files).each do |file|
+      - entries.each do |file|
         %tr
           %td
             %span.icon= file.icon

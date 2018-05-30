@@ -20,18 +20,20 @@ class Servel::Index
   end
 
   def locals
-    entries = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }.compact
-
     {
       url_root: @url_root,
       url_path: @url_path,
-      directories: directories(entries),
-      files: files(entries),
+      entries: entries,
       sort: {
         method: sort_method,
         direction: sort_direction
       }
     }
+  end
+
+  def entries
+    children = @fs_path.children.map { |path| Servel::EntryFactory.for(path) }.compact
+    special_entries + apply_sort(children.select(&:directory?)) + apply_sort(children.select(&:file?))
   end
 
   def sort_method
@@ -46,21 +48,16 @@ class Servel::Index
     param
   end
 
-  def directories(entries)
-    list = apply_sort(entries.select { |entry| entry.directory? })
+  def special_entries
+    list = []
+    list << Servel::EntryFactory.home("/") if @url_root != ""
 
     unless @url_path == "/"
-      list.unshift(Servel::EntryFactory.parent("../"))
-      list.unshift(Servel::EntryFactory.top(@url_root == "" ? "/" : @url_root))
+      list << Servel::EntryFactory.top(@url_root == "" ? "/" : @url_root)
+      list << Servel::EntryFactory.parent("../")
     end
 
-    list.unshift(Servel::EntryFactory.home("/")) if @url_root != ""
-
     list
-  end
-
-  def files(entries)
-    apply_sort(entries.select { |entry| entry.file? })
   end
 
   def apply_sort(entries)
@@ -79,5 +76,5 @@ class Servel::Index
     entries
   end
 
-  instrument :render, :locals, :directories, :files, :apply_sort
+  instrument :render, :locals, :entries, :apply_sort
 end

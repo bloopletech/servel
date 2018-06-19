@@ -104,3 +104,13 @@
   height: 100px;
   z-index: 10001;
 }
+
+@media screen and (max-width: 767px) {
+  #gallery.video, #gallery.audio, #gallery.text {
+    padding: 0 30px;
+  }
+
+  .paginator {
+    width: 30px;
+  }
+}

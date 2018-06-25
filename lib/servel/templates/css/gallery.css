@@ -65,22 +65,18 @@
 
 .paginator:active {
   background-color: #000000;
-  opacity: 0.4;
-}
-
-.paginator:hover {
-  cursor: pointer;
+  opacity: 0.7;
 }
 
 #page-back {
-  top: 0;
-  bottom: 0;
+  top: 100px;
+  bottom: 100px;
   left: 0;
 }
 
 #page-next {
   top: 0;
-  bottom: 0;
+  bottom: 100px;
   right: 0;
 }
 
@@ -107,10 +103,68 @@
 
 @media screen and (max-width: 767px) {
   #gallery.video, #gallery.audio, #gallery.text {
-    padding: 0 30px;
+    padding: 0;
   }
 
-  .paginator {
-    width: 30px;
+  #page-toggle-size {
+    display: none;
+  }
+
+  #page-back-10 {
+    top: 0;
+    bottom: auto;
+    left: 120px;
+    height: 75px;
+    width: 100px;
+  }
+
+  #page-next-10 {
+    top: 0;
+    right: 120px;
+    bottom: auto;
+    height: 75px;
+    width: 100px;
+  }
+
+  #page-back {
+    top: 0;
+    bottom: auto;
+    height: 75px;
+    width: 100px;
+  }
+
+  #page-next {
+    top: 0;
+    bottom: auto;
+    height: 75px;
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  #page-back-10 {
+    left: 80px;
+    width: 75px;
+  }
+
+  #page-next-10 {
+    right: 80px;
+    width: 75px;
+  }
+
+  #page-back {
+    width: 75px;
+  }
+
+  #page-next {
+    width: 75px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .paginator:hover {
+    background-color: #000000;
+    opacity: 0.4;
+    cursor: pointer;
   }
 }

@@ -102,6 +102,12 @@
   width: auto;
 }
 
+#page-max-item {
+  top: 0;
+  left: 100px;
+  height: 100px;
+}
+
 @media screen and (max-width: 767px) {
   #gallery.video, #gallery.audio, #gallery.text {
     padding: 0;
@@ -142,6 +148,12 @@
     left: 220px;
     height: 75px;
   }
+
+  #page-max-item {
+    top: 75px;
+    left: 0;
+    height: 75px;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -168,6 +180,10 @@
     right: auto;
     bottom: 0;
     left: 0;
+    width: 75px;
+  }
+
+  #page-max-item {
     width: 75px;
   }
 }

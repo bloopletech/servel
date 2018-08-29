@@ -7,6 +7,7 @@ require 'lru_redux'
 
 require 'thread'
 require 'pathname'
+require 'json'
 
 module Servel
   def self.build_app(path_map)
@@ -22,6 +23,7 @@ require "servel/instrumentation"
 require "servel/entry"
 require "servel/entry_factory"
 require "servel/haml_context"
+require "servel/entries"
 require "servel/index"
 require "servel/app"
 require "servel/home_app"

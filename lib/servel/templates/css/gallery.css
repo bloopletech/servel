@@ -1,6 +1,6 @@
 #gallery {
   background: #333;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
 }

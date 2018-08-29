@@ -3,23 +3,13 @@
   %table
     %thead
       %tr
-        %th{sort_attrs(sort, "name")}
+        %th.sortable.sort-active.sort-asc{data: { sort_method: 'name', sort_direction: 'asc' }}
           %a{href: "#"} Name
         %th.new-tab
-        %th.type{sort_attrs(sort, "type")}
+        %th.type.sortable{data: { sort_method: 'type', sort_direction: 'asc'}}
           %a{href: "#"} Type
-        %th.size{sort_attrs(sort, "size")}
+        %th.size.sortable{data: { sort_method: 'size', sort_direction: 'asc'}}
           %a{href: "#"} Size
-        %th.modified{sort_attrs(sort, "mtime")}
+        %th.modified.sortable{data: { sort_method: 'mtime', sort_direction: 'asc'}}
           %a{href: "#"} Modified
-    %tbody
-      - entries.each do |file|
-        %tr
-          %td
-            %span.icon= file.icon
-            %a.default{href: Rack::Utils.escape_path(file.href), class: file.listing_classes, data: { type: file.media_type }}= file.name
-          %td
-            %a.new-tab{href: Rack::Utils.escape_path(file.href), class: file.listing_classes, target: "_blank"} (New tab)
-          %td= file.type
-          %td= file.size.nil? ? "-" : number_to_human_size(file.size)
-          %td= file.mtime.nil? ? "-" : file.mtime.strftime("%e %b %Y %l:%M %p")
+  #listing-container

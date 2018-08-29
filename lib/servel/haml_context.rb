@@ -24,22 +24,6 @@ class Servel::HamlContext
     (@build_path + path).read
   end
 
-  def sort_attrs(sort, current_method)
-    data = { sort_method: current_method, sort_direction: "asc" }
-    classes = ["sortable"]
-    if sort[:method] == current_method
-      data[:sort_active] = true
-      data[:sort_direction] = sort[:direction]
-      classes << "sort-active"
-      classes << "sort-#{sort[:direction]}"
-    end
-
-    {
-      data: data,
-      class: classes
-    }
-  end
-
   def haml_engine(path)
     LOCK.synchronize do
       @@haml_engine_cache ||= {}

@@ -24,4 +24,18 @@ class Servel::Entry
   def media?
     !@media_type.nil?
   end
+
+  def as_json(*)
+    {
+      icon: @icon,
+      href: Rack::Utils.escape_path(@href),
+      class: @listing_classes,
+      media_type: @media_type,
+      name: @name,
+      type: @type,
+      size: @size.nil? ? "-" : @size,
+      mtime: @mtime.nil? ? "-" : @mtime.strftime("%e %b %Y %l:%M %p"),
+      media: media?
+    }
+  end
 end

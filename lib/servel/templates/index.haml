@@ -12,11 +12,11 @@
       #{include('css/gallery-text.css')}
 
     :javascript
-      #{include('js/url-search-params.js')}
       #{include('js/listing.js')}
       #{include('js/ume.js')}
       #{include('js/gallery.js')}
+      #{include('js/index.js')}
   %body
-    - if entries.any? { |f| f.media? }
-      #gallery!= partial('gallery')
-    #listing!= partial('listing', { url_root: url_root, url_path: url_path, entries: entries, sort: sort })
+    #gallery!= partial('gallery')
+    #listing!= partial('listing', { url_root: url_root, url_path: url_path })
+    #loading Loading...

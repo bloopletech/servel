@@ -26,7 +26,12 @@ class Servel::App
     return [404, {}, []] unless fs_path.exist?
 
     request = Rack::Request.new(env)
-    Servel::Index.new(url_root: url_root, url_path: url_path, fs_path: fs_path, params: request.params).render
+
+    if json_request?(request)
+      Servel::Entries.new(url_root: url_root, url_path: url_path, fs_path: fs_path, params: request.params).render
+    else
+      Servel::Index.new(url_root: url_root, url_path: url_path).render
+    end
   end
 
   def redirect(location)
@@ -37,6 +42,10 @@ class Servel::App
     url_path = Rack::Utils.unescape_path(path)
     raise unless Rack::Utils.valid_path?(url_path)
     Rack::Utils.clean_path_info(url_path)
+  end
+
+  def json_request?(request)
+    Rack::Utils.best_q_match(request.get_header("HTTP_ACCEPT"), ['text/html', 'application/json']) == 'application/json'
   end
 
   def try_encode(string)

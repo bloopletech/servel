@@ -1,4 +1,5 @@
 #listing {
+  display: none;
   padding: 10px;
   position: relative;
   z-index: 1;
@@ -19,6 +20,11 @@ table {
   border-collapse: collapse;
   border: 1px solid #ddd;
   table-layout: fixed;
+  will-change: transform;
+}
+
+#listing-container table, #listing-container tr:first-child td {
+  border-top: none;
 }
 
 th {
@@ -30,23 +36,27 @@ th, td {
   border: 1px solid #ddd;
 }
 
+tbody {
+  vertical-align: top;
+}
+
 tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
 
-th.new-tab {
+th.new-tab, td.new-tab {
   width: 6em;
 }
 
-th.type {
-  width: 4em;
+th.type, td.type {
+  width: 5em;
 }
 
-th.size {
+th.size, td.size {
   width: 6em;
 }
 
-th.modified {
+th.modified, td.modified {
   width: 12em;
 }
 

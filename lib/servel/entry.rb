@@ -1,4 +1,6 @@
 class Servel::Entry
+  extend Servel::Instrumentation
+
   attr_reader :ftype, :type, :media_type, :listing_classes, :icon, :href, :name, :size, :mtime
 
   def initialize(ftype:, type:, media_type: nil, listing_classes:, icon:, href:, name:, size: nil, mtime: nil)
@@ -38,4 +40,6 @@ class Servel::Entry
       media: media?
     }
   end
+
+  instrument :as_json
 end

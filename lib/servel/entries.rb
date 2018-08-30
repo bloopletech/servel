@@ -64,5 +64,5 @@ class Servel::Entries
     entries
   end
 
-  instrument :render, :locals, :entries, :apply_sort
+  instrument :render, :entries, :apply_sort
 end

@@ -25,7 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_dependency "rack", "~> 2.0"
   spec.add_dependency "puma"
-  spec.add_dependency "naturalsorter"
   spec.add_dependency "hamlit"
   spec.add_dependency "activesupport"
   spec.add_dependency "lru_redux"

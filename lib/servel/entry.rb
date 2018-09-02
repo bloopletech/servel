@@ -32,11 +32,13 @@ class Servel::Entry
       icon: @icon,
       href: Rack::Utils.escape_path(@href),
       class: @listing_classes,
-      media_type: @media_type,
+      mediaType: @media_type,
       name: @name,
       type: @type,
-      size: @size.nil? ? "-" : @size,
-      mtime: @mtime.nil? ? "-" : @mtime.strftime("%e %b %Y %l:%M %p"),
+      size: @size.to_i,
+      sizeText: @size.nil? ? "-" : @size,
+      mtime: @mtime.to_i,
+      mtimeText: @mtime.nil? ? "-" : @mtime.strftime("%e %b %Y %l:%M %p"),
       media: media?
     }
   end

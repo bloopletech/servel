@@ -4,6 +4,12 @@
     %meta{charset: 'utf-8'}
     %title Listing of #{url_root}#{url_path}
     %meta{name: 'viewport', content: 'width=device-width, height=device-height, user-scalable=no'}
+
+    :javascript
+      window.specialEntries = #{special_entries};
+      window.directoryEntries = #{directory_entries};
+      window.fileEntries = #{file_entries};
+
     :css
       #{include('css/normalize.css')}
       #{include('css/common.css')}
@@ -12,11 +18,10 @@
       #{include('css/gallery-text.css')}
 
     :javascript
+      #{include('js/entries.js')}
       #{include('js/listing.js')}
       #{include('js/ume.js')}
       #{include('js/gallery.js')}
-      #{include('js/index.js')}
   %body
     #gallery!= partial('gallery')
     #listing!= partial('listing', { url_root: url_root, url_path: url_path })
-    #loading Loading...

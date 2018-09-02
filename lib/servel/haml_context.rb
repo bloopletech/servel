@@ -9,7 +9,7 @@ class Servel::HamlContext
   end
 
   def initialize
-    @build_path = Pathname.new(__FILE__).dirname.realpath + 'templates'
+    @build_path = Pathname.new(__FILE__).dirname.realpath + "../../app"
   end
 
   def render(template, locals = {})

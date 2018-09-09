@@ -99,9 +99,18 @@ var Listing = (function() {
     document.body.addEventListener("click", function(e) {
       if(!e.target) return;
 
-      if(e.target.closest("th.sortable")) {
+      if(e.target.matches("#jump-gallery")) {
+        e.preventDefault();
+        Index.jumpGallery();
+      }
+      else if(e.target.closest("th.sortable")) {
         e.preventDefault();
         applySort(e.target.closest("th.sortable"));
+      }
+      else if(e.target.matches("a.media:not(.new-tab)")) {
+        e.preventDefault();
+        Gallery.jump(e.target.dataset.url);
+        Index.jumpGallery();
       }
     });
 

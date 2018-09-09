@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+body.has-gallery.gallery #gallery {
+  display: flex;
+}
+
 #image, #video, #audio, #text {
   display: none;
   max-width: 100%;
@@ -22,10 +26,6 @@
 #text {
   color: #000000;
   background-color: #ffffff;
-}
-
-#gallery.video, #gallery.audio, #gallery.text {
-  padding: 0 100px;
 }
 
 #gallery.video #video {
@@ -56,7 +56,7 @@
   position: absolute;
   width: 100px;
   opacity: 0;
-  font-size: 20px;
+  font-size: 2em;
   font-weight: bold;
   text-align: center;
   color: #ffffff;
@@ -74,39 +74,40 @@
 
 #page-back {
   top: 0;
-  bottom: 100px;
   left: 0;
+  height: 100px;
 }
 
 #page-next {
   top: 0;
-  bottom: 100px;
   right: 0;
+  height: 100px;
 }
 
 #page-back-10 {
-  bottom: 0;
-  left: 0;
+  top: 0;
+  left: 100px;
   height: 100px;
 }
 
 #page-next-10 {
-  bottom: 0;
-  right: 0;
+  top: 0;
+  right: 100px;
+  width: 100px;
   height: 100px;
 }
 
 #page-jump-listing {
-  right: 100px;
-  bottom: 0;
-  left: 100px;
+  top: 0;
+  right: 200px;
+  left: 200px;
   height: 100px;
   width: auto;
 }
 
 #page-max-item {
-  top: 0;
-  left: 100px;
+  top: 100px;
+  left: 0;
   height: 100px;
 }
 
@@ -115,58 +116,61 @@
     padding: 0;
   }
 
+  .paginator {
+    font-size: 20px;
+  }
+
   #page-back-10 {
     top: 0;
     bottom: auto;
-    left: 120px;
+    left: 75px;
     height: 75px;
-    width: 100px;
+    width: 75px;
   }
 
   #page-next-10 {
     top: 0;
-    right: 120px;
+    right: 75px;
     bottom: auto;
     height: 75px;
-    width: 100px;
+    width: 75px;
   }
 
   #page-back {
     bottom: auto;
     height: 75px;
-    width: 100px;
+    width: 75px;
   }
 
   #page-next {
     bottom: auto;
     height: 75px;
-    width: 100px;
+    width: 75px;
   }
 
   #page-jump-listing {
     top: 0;
-    right: 220px;
+    right: 150px;
     bottom: auto;
-    left: 220px;
+    left: 150px;
     height: 75px;
   }
 
   #page-max-item {
     top: 75px;
     left: 0;
+    width: 75px;
     height: 75px;
   }
 }
 
 @media screen and (max-width: 479px) {
   #page-back-10 {
-    left: 80px;
-    width: 75px;
+    display: none;
   }
 
   #page-next-10 {
-    right: 80px;
-    width: 75px;
+    display: none;
   }
 
   #page-back {
@@ -178,11 +182,8 @@
   }
 
   #page-jump-listing {
-    top: auto;
-    right: auto;
-    bottom: 0;
-    left: 0;
-    width: 75px;
+    right: 75px;
+    left: 75px;
   }
 
   #page-max-item {

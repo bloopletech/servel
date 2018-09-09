@@ -94,11 +94,7 @@ var Gallery = (function() {
     document.body.addEventListener("click", function(e) {
       if(!e.target) return;
 
-      if(e.target.matches("a.media:not(.new-tab)")) {
-        e.preventDefault();
-        jump(e.target.dataset.url);
-      }
-      else if(e.target.matches("#page-back")) {
+      if(e.target.matches("#page-back")) {
         e.stopPropagation();
         prev();
       }
@@ -115,8 +111,8 @@ var Gallery = (function() {
         fastForward();
       }
       else if(e.target.matches("#page-jump-listing")) {
-        e.stopPropagation();
-        $("#listing").scrollIntoView();
+        e.preventDefault();
+        Index.jumpListing();
       }
       else if(e.target.closest("#page-max-item")) {
         e.stopPropagation();
@@ -167,7 +163,7 @@ var Gallery = (function() {
     onEntriesUpdate();
 
     if(Entries.hasMedia()) {
-      $gallery.style.display = "flex";
+      document.body.classList.add("has-gallery");
 
       initEvents();
       initLayout();

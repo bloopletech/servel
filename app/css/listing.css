@@ -1,8 +1,21 @@
 #listing {
+  display: none;
   padding: 10px;
-  position: relative;
-  z-index: 1;
   background-color: #fff;
+}
+
+body.listing #listing {
+  display: block;
+}
+
+#jump-gallery-wrapper {
+  display: none;
+  float: right;
+  padding-left: 10px;
+}
+
+body.has-gallery #jump-gallery-wrapper {
+  display: block;
 }
 
 #listing h1 {
@@ -95,4 +108,10 @@ span.icon {
 
 a.default.home, a.default.top, a.default.parent {
   font-style: oblique;
+}
+
+@media screen and (max-width: 767px) {
+  #listing h1 {
+    font-size: 20px;
+  }
 }

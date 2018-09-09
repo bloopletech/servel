@@ -44,16 +44,8 @@ body.has-gallery.gallery #gallery {
   display: block;
 }
 
-#controls {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  pointer-events: none;
-}
-
 .paginator {
-  position: absolute;
+  position: fixed;
   width: 100px;
   opacity: 0;
   font-size: 2em;

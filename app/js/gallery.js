@@ -138,7 +138,6 @@ var Gallery = (function() {
   function layout() {
     var viewportHeight = document.documentElement.clientHeight + "px";
     $gallery.style.minHeight = viewportHeight;
-    $("#controls").style.height = viewportHeight;
 
     var maxHeight = layoutItemMax ? "none" : viewportHeight;
     $("#image").style.maxHeight = maxHeight;

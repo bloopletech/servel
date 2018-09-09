@@ -8,19 +8,26 @@ body.listing #listing {
   display: block;
 }
 
-#jump-gallery-wrapper {
-  display: none;
-  float: right;
-  padding-left: 20px;
-}
-
-body.has-gallery #jump-gallery-wrapper {
-  display: block;
+#header {
+  display: flex;
 }
 
 #listing h1 {
   margin-top: 0;
   margin-bottom: 20px;
+}
+
+#title {
+  flex-grow: 1;
+}
+
+#jump-gallery-wrapper {
+  display: none;
+  padding-left: 20px;
+}
+
+body.has-gallery #jump-gallery-wrapper {
+  display: block;
 }
 
 #search-wrapper {

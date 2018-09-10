@@ -13,13 +13,13 @@ body.has-gallery.gallery #gallery {
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  padding-top: 75px;
 }
 
 #image, #video, #audio, #text {
   display: none;
   max-width: 100%;
   margin: 0 auto 0 auto;
+  padding-top: 75px;
 }
 
 #video:focus, #audio:focus {

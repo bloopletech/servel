@@ -141,11 +141,10 @@ var Gallery = (function() {
   }
 
   function layout() {
-    var viewportHeight = document.documentElement.clientHeight;
-    $gallery.style.minHeight = viewportHeight + "px";
+    var viewportHeight = document.documentElement.clientHeight + "px";
+    $gallery.style.minHeight = viewportHeight;
 
-    var controlsHeight = $("#controls").scrollHeight;
-    var maxHeight = layoutItemMax ? "none" : (viewportHeight - controlsHeight) + "px";
+    var maxHeight = layoutItemMax ? "none" : viewportHeight;
     $("#image").style.maxHeight = maxHeight;
     $("#video").style.maxHeight = maxHeight;
     $("#audio").style.maxHeight = maxHeight;

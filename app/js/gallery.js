@@ -35,16 +35,21 @@ var Gallery = (function() {
 
     $gallery.classList.add(type);
 
+    var $element;
     if(type == "text") {
       renderText(url);
     }
     else {
-      var $element = $("#" + type);
+      $element = $("#" + type);
       $element.src = url;
       $element.focus();
     }
 
-    window.scrollTo(0, 0);
+    if(document.body.classList.contains("gallery")) {
+      window.scrollTo(0, 0);
+
+      if(type == "video" || type == "audio") $element.play();
+    }
 
     //if(currentPage < imageUrls.length) (new Image()).src = imageUrls[currentPage];
   }
@@ -148,7 +153,7 @@ var Gallery = (function() {
 
   function initLayout() {
     window.addEventListener("resize", layout);
-    setTimeout(layout, 0);
+    layout();
   }
 
   function onEntriesUpdate() {

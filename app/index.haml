@@ -20,10 +20,10 @@
     :javascript
       #{include('js/natural-orderby.min.js')}
       #{include('js/entries.js')}
+      #{include('js/index.js')}
       #{include('js/listing.js')}
       #{include('js/ume.js')}
       #{include('js/gallery.js')}
-      #{include('js/index.js')}
   %body
     #gallery!= partial('gallery')
     #listing!= partial('listing', { url_root: url_root, url_path: url_path })

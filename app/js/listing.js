@@ -1,7 +1,6 @@
 "use strict";
 
 var Listing = (function() {
-  var $;
   var $container;
   var perPage = 99;
   var currentIndex;
@@ -59,10 +58,6 @@ var Listing = (function() {
   function render() {
     var currentEntries = Entries.all().slice(currentIndex, currentIndex + perPage);
     $container.insertAdjacentHTML("beforeend", renderTable(currentEntries));
-  }
-
-  function atBottom() {
-    return (window.scrollY + window.innerHeight) == document.body.scrollHeight;
   }
 
   function onScrolled() {
@@ -131,7 +126,6 @@ var Listing = (function() {
   }
 
   function init() {
-    $ = document.querySelector.bind(document);
     $container = $("#listing-container");
 
     onEntriesUpdate();

@@ -1,7 +1,6 @@
 "use strict";
 
 var Gallery = (function() {
-  var $;
   var $gallery;
   var currentIndex;
   var layoutItemMax = false;
@@ -45,7 +44,7 @@ var Gallery = (function() {
       $element.focus();
     }
 
-    if(document.body.classList.contains("gallery")) {
+    if(Index.galleryVisible()) {
       window.scrollTo(0, 0);
 
       if(type == "video" || type == "audio") $element.play();
@@ -89,10 +88,6 @@ var Gallery = (function() {
       return entry.href == url;
     });
     go(index);
-  }
-
-  function atBottom() {
-    return (window.scrollY + window.innerHeight) == document.body.scrollHeight;
   }
 
   function initEvents() {
@@ -161,7 +156,6 @@ var Gallery = (function() {
   }
 
   function init() {
-    $ = document.querySelector.bind(document);
     $gallery = $("#gallery");
 
     onEntriesUpdate();

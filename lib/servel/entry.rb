@@ -36,7 +36,7 @@ class Servel::Entry
       name: @name,
       type: @type,
       size: @size.to_i,
-      sizeText: @size.nil? ? "-" : @size,
+      sizeText: @size.nil? ? "-" : ActiveSupport::NumberHelper.number_to_human_size(@size),
       mtime: @mtime.to_i,
       mtimeText: @mtime.nil? ? "-" : @mtime.strftime("%e %b %Y %l:%M %p"),
       media: media?

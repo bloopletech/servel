@@ -1,6 +1,5 @@
 class Servel::HamlContext
   extend Servel::Instrumentation
-  include ActiveSupport::NumberHelper
 
   LOCK = Mutex.new
 

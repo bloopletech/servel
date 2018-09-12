@@ -62,9 +62,9 @@ var Entries = (function() {
   }
 
   function updateLists() {
-    specialEntries = window.specialEntries.slice();
-    directoryEntries = runSort(runFilter(window.directoryEntries.slice()));
-    fileEntries = runSort(runFilter(window.fileEntries.slice()));
+    var specialEntries = window.specialEntries.slice();
+    var directoryEntries = runSort(runFilter(window.directoryEntries.slice()));
+    var fileEntries = runSort(runFilter(window.fileEntries.slice()));
 
     all = [].concat(specialEntries, directoryEntries, fileEntries);
 

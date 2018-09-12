@@ -23,10 +23,10 @@ var Entries = (function() {
     return filteredEntries;
   }
 
-  function sortByName(entries) {
-    return naturalOrderBy.orderBy(entries, function(entry) {
-      return entry.name.toLowerCase();
-    }, sortDirection);
+  var nameCollator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+
+  function sortByName(a, b) {
+    return nameCollator.compare(a.name, b.name);
   }
 
   function sortByMtime(a, b) {
@@ -48,10 +48,9 @@ var Entries = (function() {
   }
 
   function runSort(entries) {
-    if(sortMethod == "name") return sortByName(entries);
-
     var sortFunction;
-    if(sortMethod == "mtime") sortFunction = sortByMtime;
+    if(sortMethod == "name") sortFunction = sortByName;
+    else if(sortMethod == "mtime") sortFunction = sortByMtime;
     else if(sortMethod == "size") sortFunction = sortBySize;
     else if(sortMethod == "type") sortFunction = sortByType;
 

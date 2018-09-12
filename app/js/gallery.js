@@ -1,9 +1,11 @@
 "use strict";
 
 var Gallery = (function() {
+  var LAYOUT_MODES = ["fit-both", "fit-width", "clamp-width"];
+
   var $gallery;
   var currentIndex;
-  var layoutItemMax = false;
+  var layoutModeIndex = 0;
 
   function renderText(url) {
     var http = new XMLHttpRequest();
@@ -90,6 +92,11 @@ var Gallery = (function() {
     go(index);
   }
 
+  function switchLayoutMode() {
+    layoutModeIndex++;
+    if(layoutModeIndex >= LAYOUT_MODES.length) layoutModeIndex = 0;
+  }
+
   function initEvents() {
     document.body.addEventListener("click", function(e) {
       if(!e.target) return;
@@ -114,9 +121,9 @@ var Gallery = (function() {
         e.preventDefault();
         Index.jumpListing();
       }
-      else if(e.target.closest("#page-max-item")) {
+      else if(e.target.closest("#layout-mode")) {
         e.stopPropagation();
-        layoutItemMax = !layoutItemMax;
+        switchLayoutMode();
         layout();
       }
     });
@@ -139,9 +146,15 @@ var Gallery = (function() {
     var viewportHeight = document.documentElement.clientHeight + "px";
     $gallery.style.minHeight = viewportHeight;
 
-    var maxHeight = layoutItemMax ? "none" : viewportHeight;
+    var layoutMode = LAYOUT_MODES[layoutModeIndex];
+    var maxHeight = layoutMode == "fit-both" ? viewportHeight : "none";
+    var maxWidth = layoutMode == "clamp-width" ? "1000px" : "100%";
+
+    $("#image").style.maxWidth = maxWidth;
     $("#image").style.maxHeight = maxHeight;
+    $("#video").style.maxWidth = maxWidth;
     $("#video").style.maxHeight = maxHeight;
+    $("#audio").style.maxWidth = maxWidth;
     $("#audio").style.maxHeight = maxHeight;
   }
 

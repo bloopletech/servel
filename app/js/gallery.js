@@ -20,9 +20,9 @@ var Gallery = (function() {
 
   function clearContent() {
     $gallery.classList.remove("image", "video", "audio", "text");
-    $("#image").src = "about:none";
-    $("#video").src = "about:none";
-    $("#audio").src = "about:none";
+    $("#image").removeAttribute('src');
+    $("#video").removeAttribute('src');
+    $("#audio").removeAttribute('src');
     $("#text-content").innerHTML = "";
   }
 
@@ -97,6 +97,12 @@ var Gallery = (function() {
     if(layoutModeIndex >= LAYOUT_MODES.length) layoutModeIndex = 0;
   }
 
+  function playPauseVideo() {
+    var $video = $("#video");
+    if ($video.paused || $video.ended) $video.play();
+    else $video.pause();
+  }
+
   function initEvents() {
     document.body.addEventListener("click", function(e) {
       if(!e.target) return;
@@ -118,13 +124,17 @@ var Gallery = (function() {
         fastForward();
       }
       else if(e.target.matches("#page-jump-listing")) {
-        e.preventDefault();
+        e.stopPropagation();
         Index.jumpListing();
       }
       else if(e.target.closest("#layout-mode")) {
         e.stopPropagation();
         switchLayoutMode();
         layout();
+      }
+      else if(e.target.matches("#video")) {
+        e.stopPropagation();
+        playPauseVideo();
       }
     });
 

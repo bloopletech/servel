@@ -4,6 +4,8 @@ var Gallery = (function() {
   var LAYOUT_MODES = ["fit-both", "fit-width", "clamp-width"];
 
   var $gallery;
+  var $video;
+  var $audio;
   var currentIndex;
   var layoutModeIndex = 0;
 
@@ -20,9 +22,10 @@ var Gallery = (function() {
 
   function clearContent() {
     $gallery.classList.remove("image", "video", "audio", "text");
-    $("#image").removeAttribute('src');
-    $("#video").removeAttribute('src');
-    $("#audio").removeAttribute('src');
+    $video.removeAttribute('src');
+    $video.pause();
+    $audio.removeAttribute('src');
+    $audio.pause();
     $("#text-content").innerHTML = "";
   }
 
@@ -98,7 +101,6 @@ var Gallery = (function() {
   }
 
   function playPauseVideo() {
-    var $video = $("#video");
     if ($video.paused || $video.ended) $video.play();
     else $video.pause();
   }
@@ -162,10 +164,10 @@ var Gallery = (function() {
 
     $("#image").style.maxWidth = maxWidth;
     $("#image").style.maxHeight = maxHeight;
-    $("#video").style.maxWidth = maxWidth;
-    $("#video").style.maxHeight = maxHeight;
-    $("#audio").style.maxWidth = maxWidth;
-    $("#audio").style.maxHeight = maxHeight;
+    $video.style.maxWidth = maxWidth;
+    $video.style.maxHeight = maxHeight;
+    $audio.style.maxWidth = maxWidth;
+    $audio.style.maxHeight = maxHeight;
   }
 
   function initLayout() {
@@ -180,6 +182,8 @@ var Gallery = (function() {
 
   function init() {
     $gallery = $("#gallery");
+    $video = $("#video");
+    $audio = $("#audio");
 
     onEntriesUpdate();
 

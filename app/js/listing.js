@@ -27,7 +27,7 @@ var Listing = (function() {
   function renderRow(file) {
     return HTMLSafe`
       <tr>
-        <td class="name">
+        <td class="name text-selectable">
           <span class="icon">${file.icon}</span>
           <a href="${file.href}" class="default ${file.class}" data-url="${file.href}" data-type="${file.mediaType}">${file.name}</a>
         </td>

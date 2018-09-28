@@ -16,6 +16,14 @@ body {
   user-select: none;
 }
 
+.text-selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 a {
   text-decoration: none;
 }

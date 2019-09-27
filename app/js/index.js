@@ -61,8 +61,7 @@ var Index = (function() {
   }
 
   function init() {
-    if((Entries.media().length / Entries.all().length) >= 0.5) jumpGallery();
-    else jumpListing();
+    jumpListing();
 
     initEvents();
   }

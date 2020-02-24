@@ -1,8 +1,9 @@
 "use strict";
 
 var Gallery = (function() {
-  var LAYOUT_MODES = ["fit-both", "fit-width", "clamp-width"];
+  var LAYOUT_MODES = ["fit-both", "fit-width", "clamp-width", "full-size"];
 
+  var $body;
   var $gallery;
   var $video;
   var $audio;
@@ -155,12 +156,35 @@ var Gallery = (function() {
   }
 
   function layout() {
-    var viewportHeight = document.documentElement.clientHeight + "px";
-    $gallery.style.minHeight = viewportHeight;
+    var vw = document.documentElement.clientWidth;
+    var vh = document.documentElement.clientHeight;
+
+    var viewportOrientation = vw > vh ? "landscape" : "portrait";
+    $body.classList.remove("landscape", "portrait");
+    $body.classList.add(viewportOrientation);
+
+    $gallery.style.height = vh + "px";
+
+    var scrollerMaxHeight = viewportOrientation == "landscape" ? vh : vh - 75;
 
     var layoutMode = LAYOUT_MODES[layoutModeIndex];
-    var maxHeight = layoutMode == "fit-both" ? viewportHeight : "none";
-    var maxWidth = layoutMode == "clamp-width" ? "1000px" : "100%";
+
+    if(layoutMode == "fit-both") {
+      var maxWidth = "100%";
+      var maxHeight = (scrollerMaxHeight + "px");
+    }
+    else if(layoutMode == "fit-width") {
+      var maxWidth = "100%";
+      var maxHeight = "none";
+    }
+    else if(layoutMode == "clamp-width") {
+      var maxWidth = "1000px";
+      var maxHeight = "none";
+    }
+    else if(layoutMode == "full-size") {
+      var maxWidth = "none";
+      var maxHeight = "none";
+    }
 
     $("#image").style.maxWidth = maxWidth;
     $("#image").style.maxHeight = maxHeight;
@@ -181,6 +205,7 @@ var Gallery = (function() {
   }
 
   function init() {
+    $body = $("body");
     $gallery = $("#gallery");
     $video = $("#video");
     $audio = $("#audio");

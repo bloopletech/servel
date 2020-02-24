@@ -1,11 +1,38 @@
 #gallery {
   background: #333;
   display: none;
-  flex-direction: column;
 }
 
 body.has-gallery.gallery #gallery {
   display: flex;
+}
+
+#controls {
+  display: flex;
+}
+
+#page-jump-listing {
+  flex-grow: 1;
+}
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75px;
+
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  background-color: #1f1f1f;
+  color: #858585;
+
+  cursor: pointer;
+}
+
+.paginator:hover {
+  background-color: #0f0f0f;
+  color: #c1c1c1;
 }
 
 #content {
@@ -13,13 +40,46 @@ body.has-gallery.gallery #gallery {
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+#scroller {
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+body.portrait #gallery {
+  flex-direction: column;
+}
+
+body.portrait .paginator {
+  width: 100px;
+}
+
+body.portrait #page-jump-listing {
+  width: auto;
+}
+
+body.landscape #gallery {
+  flex-direction: row;
+}
+
+body.landscape #controls {
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 100px;
+}
+
+body.landscape #page-jump-listing {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
 #image, #video, #audio, #text {
   display: none;
-  max-width: 100%;
   margin: 0 auto 0 auto;
-  padding-top: 75px;
 }
 
 #video:focus, #audio:focus {
@@ -51,36 +111,6 @@ body.has-gallery.gallery #gallery {
   display: block;
 }
 
-#controls {
-  position: fixed;
-  left: 0;
-  right: 0;
-  display: flex;
-  z-index: 10;
-}
-
-.paginator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 75px;
-
-  font-size: 2em;
-  font-weight: bold;
-  text-align: center;
-  background-color: #000000;
-  color: #ffffff;
-
-  opacity: 0.4;
-  cursor: pointer;
-}
-
-#page-jump-listing {
-  flex-grow: 1;
-  width: auto;
-}
-
 @media screen and (max-width: 767px) {
   #gallery.video, #gallery.audio, #gallery.text {
     padding: 0;
@@ -99,11 +129,5 @@ body.has-gallery.gallery #gallery {
 
   #page-next-10 {
     display: none;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .paginator:hover {
-    opacity: 0.7;
   }
 }

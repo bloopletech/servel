@@ -5,6 +5,7 @@ var Gallery = (function() {
 
   var $body;
   var $gallery;
+  var $image;
   var $video;
   var $audio;
   var currentIndex;
@@ -186,8 +187,8 @@ var Gallery = (function() {
       var maxHeight = "none";
     }
 
-    $("#image").style.maxWidth = maxWidth;
-    $("#image").style.maxHeight = maxHeight;
+    $image.style.maxWidth = maxWidth;
+    $image.style.maxHeight = maxHeight;
     $video.style.maxWidth = maxWidth;
     $video.style.maxHeight = maxHeight;
     $audio.style.maxWidth = maxWidth;
@@ -207,6 +208,7 @@ var Gallery = (function() {
   function init() {
     $body = $("body");
     $gallery = $("#gallery");
+    $image = $("#image");
     $video = $("#video");
     $audio = $("#audio");
 

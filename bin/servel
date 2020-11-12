@@ -2,4 +2,4 @@
 
 require "servel"
 
-Servel::CLI.new(ARGV).start
+Servel::CLI.new.start

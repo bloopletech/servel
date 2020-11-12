@@ -3,6 +3,7 @@ require 'rack/handler/puma'
 require 'hamlit'
 require 'active_support/all'
 require 'lru_redux'
+require 'tty-config'
 
 require 'thread'
 require 'pathname'
@@ -15,6 +16,10 @@ module Servel
 
     Rack::URLMap.new(url_map)
   end
+
+  def self.config
+    @config ||= Servel::ConfigParser.new.config
+  end
 end
 
 require "servel/version"
@@ -25,4 +30,5 @@ require "servel/haml_context"
 require "servel/index"
 require "servel/app"
 require "servel/home_app"
+require "servel/config_parser"
 require "servel/cli"

@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "hamlit"
   spec.add_dependency "activesupport"
   spec.add_dependency "lru_redux"
+  spec.add_dependency "tty-config"
 end

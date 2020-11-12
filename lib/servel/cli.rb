@@ -1,6 +1,9 @@
 class Servel::CLI
   def start
-    Rack::Handler::Puma.run(Servel.build_app(path_map))
+    Rack::Handler::Puma.run(Servel.build_app(path_map), {
+      Host: Servel.config.fetch(:host),
+      Port: Servel.config.fetch(:port)
+    })
   end
 
   def path_map

@@ -1,5 +1,6 @@
 require 'rack'
 require 'rack/handler/puma'
+require 'puma/configuration'
 require 'hamlit'
 require 'active_support/all'
 require 'lru_redux'

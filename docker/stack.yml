@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  servel:
+    build: .
+    ports:
+      - "9292:9292"
+    volumes:
+      - C:/:/mnt/c
+

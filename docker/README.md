@@ -5,7 +5,6 @@
 
 -	**Where to get help**:  
   Currently there is no official support offered; please use at your own risk
-	[Upstream's GitHub Issues](https://github.com/bloopletech/servel/issues)
 
 # Supported tags and respective `Dockerfile` links
 

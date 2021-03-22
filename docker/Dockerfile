@@ -10,4 +10,6 @@ ENV SERVEL_LISTINGS="/mnt"
 
 EXPOSE 9292
 
+WORKDIR /servel
+
 CMD ["servel"]

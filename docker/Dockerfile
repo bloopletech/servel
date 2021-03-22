@@ -1,8 +1,8 @@
-FROM ruby:2.6.6-alpine3.12
+FROM ruby:2.7.2-alpine3.13
 
 ENV LANG="C.UTF-8" SSL_CERT_DIR="/etc/ssl/certs"
 
-RUN apk add --no-cache build-base && \
+RUN apk add --no-cache build-base openssl-dev && \
     gem install servel && \
     apk del build-base
 
